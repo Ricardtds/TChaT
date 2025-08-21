@@ -1,0 +1,2346 @@
+{
+  "id": 67262278,
+  "user_id": 68422390,
+  "slug": "gaules",
+  "is_banned": false,
+  "playback_url": "https://fa723fc1b171.us-west-2.playback.live-video.net/api/video/v1/us-west-2.196233775518.channel.dvkGqjenUGAB.m3u8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzM4NCJ9.eyJhd3M6Y2hhbm5lbC1hcm4iOiJhcm46YXdzOml2czp1cy13ZXN0LTI6MTk2MjMzNzc1NTE4OmNoYW5uZWwvZHZrR3FqZW5VR0FCIiwiYXdzOmFjY2Vzcy1jb250cm9sLWFsbG93LW9yaWdpbiI6Imh0dHBzOi8va2ljay5jb20saHR0cHM6Ly93d3cuZ3N0YXRpYy5jb20saHR0cHM6Ly8qLmtpY2subGl2ZSxodHRwczovL3BsYXllci5raWNrLmNvbSxodHRwczovL2FkbWluLmtpY2suY29tLGh0dHBzOi8vYmV0YS5raWNrLmNvbSxodHRwczovL25leHQua2ljay5jb20saHR0cHM6Ly9kYXNoYm9hcmQua2ljay5jb20saHR0cHM6Ly8qLnByZXZpZXcua2ljay5jb20iLCJhd3M6c3RyaWN0LW9yaWdpbi1lbmZvcmNlbWVudCI6ZmFsc2UsImV4cCI6MTc1NTc5NjMzNn0.6u9uhknLSSRaYwCMaB4JkxyJMhwsnBMETojhZtYVBS3ysJBF11F3LkQa0i9BZyVWdKhj-vKaw9JEpl6fjrBERNqpVgrnWPPwRCQC5XopcJEQJqKnRnxH6SnbKjJfWB5A",
+  "name_updated_at": null,
+  "vod_enabled": true,
+  "subscription_enabled": true,
+  "is_affiliate": true,
+  "followersCount": 74128,
+  "subscriber_badges": [
+    {
+      "id": 553609,
+      "channel_id": 67262278,
+      "months": 1,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553609/original"
+      }
+    },
+    {
+      "id": 553611,
+      "channel_id": 67262278,
+      "months": 2,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553611/original"
+      }
+    },
+    {
+      "id": 553613,
+      "channel_id": 67262278,
+      "months": 3,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553613/original"
+      }
+    },
+    {
+      "id": 553615,
+      "channel_id": 67262278,
+      "months": 6,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553615/original"
+      }
+    },
+    {
+      "id": 553618,
+      "channel_id": 67262278,
+      "months": 9,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553618/original"
+      }
+    },
+    {
+      "id": 553620,
+      "channel_id": 67262278,
+      "months": 12,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553620/original"
+      }
+    },
+    {
+      "id": 553622,
+      "channel_id": 67262278,
+      "months": 18,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553622/original"
+      }
+    },
+    {
+      "id": 553624,
+      "channel_id": 67262278,
+      "months": 24,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553624/original"
+      }
+    },
+    {
+      "id": 553626,
+      "channel_id": 67262278,
+      "months": 30,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553626/original"
+      }
+    },
+    {
+      "id": 553629,
+      "channel_id": 67262278,
+      "months": 36,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553629/original"
+      }
+    },
+    {
+      "id": 553632,
+      "channel_id": 67262278,
+      "months": 42,
+      "badge_image": {
+        "srcset": "",
+        "src": "https://files.kick.com/channel_subscriber_badges/553632/original"
+      }
+    }
+  ],
+  "banner_image": {
+    "responsive": "",
+    "url": "https://files.kick.com/images/channel/67262278/banner_image/96109b18-3f7d-4375-8332-093968e6f55e"
+  },
+  "recent_categories": [
+    {
+      "id": 1552,
+      "category_id": 1,
+      "name": "Counter-Strike 2",
+      "slug": "counter-strike-2",
+      "tags": ["Shooter", "Tactical"],
+      "description": null,
+      "deleted_at": null,
+      "is_mature": false,
+      "is_promoted": false,
+      "viewers": 24588,
+      "is_fallback": false,
+      "banner": {
+        "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+        "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+      },
+      "category": {
+        "id": 1,
+        "name": "Games",
+        "slug": "games",
+        "icon": "\ud83d\udd79\ufe0f"
+      }
+    },
+    {
+      "id": 6714,
+      "category_id": 1,
+      "name": "The Lord of the Rings: Return to Moria",
+      "slug": "the-lord-of-the-rings-return-to-moria",
+      "tags": ["Adventure"],
+      "description": null,
+      "deleted_at": null,
+      "is_mature": false,
+      "is_promoted": false,
+      "viewers": 2,
+      "is_fallback": false,
+      "banner": {
+        "responsive": "https://files.kick.com/images/subcategories/6714/banner/responsives/28c6d60d-fa21-4b4b-9b77-607201446360___banner_285_380.webp 285w, https://files.kick.com/images/subcategories/6714/banner/responsives/28c6d60d-fa21-4b4b-9b77-607201446360___banner_238_317.webp 238w",
+        "url": "https://files.kick.com/images/subcategories/6714/banner/28c6d60d-fa21-4b4b-9b77-607201446360"
+      },
+      "category": {
+        "id": 1,
+        "name": "Games",
+        "slug": "games",
+        "icon": "\ud83d\udd79\ufe0f"
+      }
+    }
+  ],
+  "livestream": {
+    "id": 70357759,
+    "slug": "d68f7-esports-world-cup-dia-2-socio-siga-at-gaules-nas-redes-sociais",
+    "channel_id": 67262278,
+    "created_at": "2025-08-21 10:14:11",
+    "session_title": "Esports World Cup Dia 2 - !socio - Siga @Gaules nas redes sociais!",
+    "is_live": true,
+    "risk_level_id": null,
+    "start_time": "2025-08-21 10:14:10",
+    "source": null,
+    "twitch_channel": null,
+    "duration": 0,
+    "language": "Portuguese",
+    "is_mature": false,
+    "viewer_count": 3263,
+    "thumbnail": {
+      "responsive": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/1080.webp?versionId=fmtez0TlsX5Ou5Jf3ZCItX36qjm1iZkp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/720.webp?versionId=BBqBUcrwkwg_Nij6liKaimpxc2.wCgR6 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/360.webp?versionId=g_pq5ZJF6Yw_t3pwH3FjfWAkSAdgALb3 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/160.webp?versionId=5VbVBg3XOdHhjwO0RqusUcvV_KjpJCPs 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/480.webp?versionId=WjjMDyulXAhTkHVepQ9EjeJqKg24rPSm 640w",
+      "url": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/720.webp?versionId=BBqBUcrwkwg_Nij6liKaimpxc2.wCgR6"
+    },
+    "viewers": 3263,
+    "lang_iso": "pt",
+    "tags": ["cs", "portugu\u00eas", "CAMPEONATO", "gaules", "counterstike2"],
+    "categories": [
+      {
+        "id": 1552,
+        "category_id": 1,
+        "name": "Counter-Strike 2",
+        "slug": "counter-strike-2",
+        "tags": ["Shooter", "Tactical"],
+        "description": null,
+        "deleted_at": null,
+        "is_mature": false,
+        "is_promoted": false,
+        "viewers": 24588,
+        "is_fallback": false,
+        "category": {
+          "id": 1,
+          "name": "Games",
+          "slug": "games",
+          "icon": "\ud83d\udd79\ufe0f"
+        }
+      }
+    ]
+  },
+  "role": null,
+  "muted": false,
+  "follower_badges": [],
+  "offline_banner_image": {
+    "src": "https://files.kick.com/images/channel/67262278/offline_banner/conversion/50d279c9-fc28-497d-bff0-b7df634b7bae-fullsize.jpg",
+    "srcset": "https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_1200_675.webp 1200w, https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_1003_564.webp 1003w, https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_839_472.webp 839w, https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_702_395.webp 702w, https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_587_330.webp 587w, https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_491_276.webp 491w, https://files.kick.com/images/channel/67262278/offline_banner/responsives/50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_411_231.webp 411w"
+  },
+  "can_host": true,
+  "user": {
+    "id": 68422390,
+    "username": "Gaules",
+    "agreed_to_terms": true,
+    "email_verified_at": "2025-07-10T14:06:56.000000Z",
+    "bio": "Mais um guerreiro da Maior Tribo do Mundo! Atuei como jogador profissional de CS por quase uma d\u00e9cada, fui o primeiro treinador a ser campe\u00e3o do mundo em 2007 com o MIBR. Acertei um pouco, errei muito, ganhei bastante coisa e tbm perdi demais! Atualmente fa\u00e7o live todos os dias aqui na Kick!",
+    "country": null,
+    "state": null,
+    "city": null,
+    "instagram": "Gaules",
+    "twitter": "Gaules",
+    "youtube": "Gaules",
+    "discord": "Gaules",
+    "tiktok": "Gaules",
+    "facebook": "Gaules",
+    "profile_pic": "https://files.kick.com/images/user/68422390/profile_image/conversion/eb90d90b-cb14-45ee-a2f6-46da3f9a0b2f-fullsize.webp"
+  },
+  "chatroom": {
+    "id": 66973867,
+    "chatable_type": "App\\Models\\Channel",
+    "channel_id": 67262278,
+    "created_at": "2025-07-10T14:06:56.000000Z",
+    "updated_at": "2025-08-20T18:16:29.000000Z",
+    "chat_mode_old": "public",
+    "chat_mode": "public",
+    "slow_mode": true,
+    "chatable_id": 67262278,
+    "followers_mode": true,
+    "subscribers_mode": false,
+    "emotes_mode": false,
+    "message_interval": 1,
+    "following_min_duration": 10
+  },
+  "ascending_links": [
+    {
+      "id": 2181099,
+      "channel_id": 67262278,
+      "description": "**Siga as redes sociais para saber sobre as Lives**\n\n\ud83d\udcf7 **Instagram:** [@Gaules](http://instagram.com/gaules)\n\ud83d\udc24 **Twitter:** [@Gaules](http://Twitter.com/gaules)\n\ud83c\udfa5 **YouTube:** [@Gaules](http://Youtube.com/gaules)\n\ud83d\udce9 [Contato Email](mailto:contato@gaules.tv)",
+      "link": "",
+      "created_at": "2025-07-17T00:57:52.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 1,
+      "title": ""
+    },
+    {
+      "id": 2181100,
+      "channel_id": 67262278,
+      "description": "O nome Gaules refor\u00e7a valores de um povo que realmente merecem ser preservados: a coragem diante do desconhecido, a tenacidade diante de um inimigo aparentemente invenc\u00edvel, a lealdade, a amizade e n\u00e3o apenas o respeito pela diversidade, mas o desejo de compreender as diferentes possibilidades culturais que nos cercam.\n\n**Qualquer comportamento que n\u00e3o respeite as regras da tribo ser\u00e3o devidamente penalizados**",
+      "link": "",
+      "created_at": "2025-07-17T00:59:55.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 2,
+      "title": ""
+    },
+    {
+      "id": 2187426,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://streamelements.com/gaules/store",
+      "created_at": "2025-07-19T15:56:50.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 3,
+      "title": ""
+    },
+    {
+      "id": 2181123,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://streamelements.com/gaules-81821/tip",
+      "created_at": "2025-07-17T01:12:44.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 4,
+      "title": ""
+    },
+    {
+      "id": 2215629,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://cs.money/r/gaul25",
+      "created_at": "2025-07-28T13:51:23.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 5,
+      "title": ""
+    },
+    {
+      "id": 2215633,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://www.kabum.com.br/?utm_source=INFLUENCER&utm_medium=GAULES&utm_campaign=HOME&utm_content=BANNER",
+      "created_at": "2025-07-28T13:51:52.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 6,
+      "title": ""
+    },
+    {
+      "id": 2278396,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://p.skin.place/FreezeTimehttps://bit.ly/46Tnxff",
+      "created_at": "2025-08-16T02:58:11.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 7,
+      "title": ""
+    },
+    {
+      "id": 2214171,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://www.vakinha.com.br/vaquinha/aniversario-do-paq-associacao-prototipando-a-quebrada",
+      "created_at": "2025-07-28T01:12:18.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 8,
+      "title": ""
+    },
+    {
+      "id": 2215627,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://cookiedourado.bauduccotododia.com.br/?utm_source=twitch&utm_medium=banner&utm_campaign=Gaules",
+      "created_at": "2025-07-28T13:51:10.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 9,
+      "title": ""
+    },
+    {
+      "id": 2215634,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "https://encurtador.com.br/kVUPM",
+      "created_at": "2025-07-28T13:52:10.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 10,
+      "title": ""
+    },
+    {
+      "id": 2215630,
+      "channel_id": 67262278,
+      "description": "",
+      "link": "http://bit.ly/44jroRr",
+      "created_at": "2025-07-28T13:51:37.000000Z",
+      "updated_at": "2025-08-17T12:27:22.000000Z",
+      "order": 11,
+      "title": ""
+    }
+  ],
+  "plan": null,
+  "previous_livestreams": [
+    {
+      "id": 70357759,
+      "slug": "d68f7-esports-world-cup-dia-2-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-21 10:14:11",
+      "session_title": "Esports World Cup Dia 2 - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": true,
+      "risk_level_id": null,
+      "start_time": "2025-08-21 10:14:10",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 0,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 3263,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/720.webp?versionId=BBqBUcrwkwg_Nij6liKaimpxc2.wCgR6",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/1080.webp?versionId=fmtez0TlsX5Ou5Jf3ZCItX36qjm1iZkp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/720.webp?versionId=BBqBUcrwkwg_Nij6liKaimpxc2.wCgR6 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/360.webp?versionId=g_pq5ZJF6Yw_t3pwH3FjfWAkSAdgALb3 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/160.webp?versionId=5VbVBg3XOdHhjwO0RqusUcvV_KjpJCPs 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/IFARkTPDR5gQ/480.webp?versionId=WjjMDyulXAhTkHVepQ9EjeJqKg24rPSm 640w"
+      },
+      "views": 155,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 66159542,
+        "live_stream_id": 70357759,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-21T10:14:12.000000Z",
+        "updated_at": "2025-08-21T17:00:46.000000Z",
+        "uuid": "d6263329-9497-4442-ab35-ceec3cad5827",
+        "views": 155,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 70354420,
+      "slug": "436f2-freezetime-esports-world-cup-dia-2-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-21 09:06:02",
+      "session_title": "FreezeTime - Esports World Cup Dia 2 - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-21 09:06:01",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 3696000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 15,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FPsBWGxJL63l/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FPsBWGxJL63l/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FPsBWGxJL63l/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FPsBWGxJL63l/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FPsBWGxJL63l/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FPsBWGxJL63l/480.webp 640w"
+      },
+      "views": 134,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 66156224,
+        "live_stream_id": 70354420,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-21T09:06:02.000000Z",
+        "updated_at": "2025-08-21T17:02:09.000000Z",
+        "uuid": "3d67737e-5b17-416a-96df-a43418a9ec55",
+        "views": 134,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 70199068,
+      "slug": "d2798-dia-1-esports-world-cup-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-20 10:22:28",
+      "session_title": "Dia 1 Esports World Cup - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-20 10:22:28",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 38723000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 354,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/UY2b8dMR10IO/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/UY2b8dMR10IO/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/UY2b8dMR10IO/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/UY2b8dMR10IO/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/UY2b8dMR10IO/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/UY2b8dMR10IO/480.webp 640w"
+      },
+      "views": 2764,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 66001726,
+        "live_stream_id": 70199068,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-20T10:22:29.000000Z",
+        "updated_at": "2025-08-21T16:36:18.000000Z",
+        "uuid": "0001cc74-f632-40a0-8aa1-9f44becb779a",
+        "views": 2764,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 70194941,
+      "slug": "859b0-freezetime-esports-world-cup-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-20 08:56:08",
+      "session_title": "FreezeTime - Esports World Cup - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-20 08:56:07",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4675000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 18,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/gVyK4kjMlUyU/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/gVyK4kjMlUyU/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/gVyK4kjMlUyU/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/gVyK4kjMlUyU/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/gVyK4kjMlUyU/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/gVyK4kjMlUyU/480.webp 640w"
+      },
+      "views": 525,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65997630,
+        "live_stream_id": 70194941,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-20T08:56:09.000000Z",
+        "updated_at": "2025-08-21T16:13:52.000000Z",
+        "uuid": "6fe30a15-5b1c-4ba5-9788-e78498df3509",
+        "views": 525,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 69747559,
+      "slug": "86081791-spirit-x-the-mongolz-grande-final-blast-bounty-2025-finals-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-17 13:48:08",
+      "session_title": "SPIRIT X THE MONGOLZ - GRANDE FINAL - BLAST BOUNTY 2025 FINALS - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-17 13:48:07",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 13134000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 82,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/P0RvYvH7lyaA/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/P0RvYvH7lyaA/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/P0RvYvH7lyaA/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/P0RvYvH7lyaA/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/P0RvYvH7lyaA/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/P0RvYvH7lyaA/480.webp 640w"
+      },
+      "views": 2209,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65552713,
+        "live_stream_id": 69747559,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-17T13:48:09.000000Z",
+        "updated_at": "2025-08-21T15:55:38.000000Z",
+        "uuid": "b2286d40-c219-459f-9527-33838fb13ea5",
+        "views": 2209,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 69741369,
+      "slug": "7a392-freeze-time-blast-bounty-2025-grande-final-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-17 12:32:05",
+      "session_title": "FREEZE TIME - BLAST BOUNTY 2025 GRANDE FINAL - !socio - Siga @Gaules nas redes sociais",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-17 12:32:04",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4416000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 74,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WDvlc9LQhZ8q/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WDvlc9LQhZ8q/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WDvlc9LQhZ8q/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WDvlc9LQhZ8q/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WDvlc9LQhZ8q/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WDvlc9LQhZ8q/480.webp 640w"
+      },
+      "views": 1510,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65546558,
+        "live_stream_id": 69741369,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-17T12:32:06.000000Z",
+        "updated_at": "2025-08-21T16:13:23.000000Z",
+        "uuid": "5cd5ce20-a871-4df0-a658-77e4455abc0a",
+        "views": 1510,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 69575427,
+      "slug": "1ccb1-semifinais-blast-bounty-2025-finals-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-16 10:53:54",
+      "session_title": "SEMIFINAIS - BLAST BOUNTY 2025 FINALS - !socio - Siga @Gaules nas redes sociais",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-16 10:53:53",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 27639000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 101,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/26ql4PhM2gl1/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/26ql4PhM2gl1/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/26ql4PhM2gl1/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/26ql4PhM2gl1/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/26ql4PhM2gl1/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/26ql4PhM2gl1/480.webp 640w"
+      },
+      "views": 3560,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65381560,
+        "live_stream_id": 69575427,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-16T10:53:55.000000Z",
+        "updated_at": "2025-08-21T14:39:42.000000Z",
+        "uuid": "cc60d90e-cdaf-4b01-b30b-8750a8198b08",
+        "views": 3560,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 69411640,
+      "slug": "3cfcf-quartas-de-final-dia-2-blast-bounty-2025-finals-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-15 10:51:21",
+      "session_title": "QUARTAS DE FINAL DIA 2 - BLAST BOUNTY 2025 FINALS - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-15 10:51:20",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 30463000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 59,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FFVekEuJq93J/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FFVekEuJq93J/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FFVekEuJq93J/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FFVekEuJq93J/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FFVekEuJq93J/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/FFVekEuJq93J/480.webp 640w"
+      },
+      "views": 1347,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65221041,
+        "live_stream_id": 69411640,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-15T10:51:22.000000Z",
+        "updated_at": "2025-08-21T15:55:38.000000Z",
+        "uuid": "6b9e544d-e682-4b5c-9ca5-81c5c07d2f2a",
+        "views": 1347,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 69262998,
+      "slug": "11792924-quartas-de-final-dia-1-blast-bounty-2025-finals-socio-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-14 13:51:07",
+      "session_title": "QUARTAS DE FINAL Dia 1 - BLAST BOUNTY 2025 FINALS - !socio - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-14 13:51:06",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 17486000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 45,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/8FVxR57I9yic/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/8FVxR57I9yic/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/8FVxR57I9yic/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/8FVxR57I9yic/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/8FVxR57I9yic/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/8FVxR57I9yic/480.webp 640w"
+      },
+      "views": 2502,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65073187,
+        "live_stream_id": 69262998,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-14T13:51:08.000000Z",
+        "updated_at": "2025-08-21T09:08:01.000000Z",
+        "uuid": "2e82adc3-4b97-4212-9a85-c6af7f5813bc",
+        "views": 2502,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 69257074,
+      "slug": "438a8-freezetime-blast-bounty-2025-s2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-14 12:41:30",
+      "session_title": "FreezeTime - Blast Bounty 2025 S2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-14 12:41:30",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4030000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 34,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/pUAUiCgC6inV/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/pUAUiCgC6inV/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/pUAUiCgC6inV/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/pUAUiCgC6inV/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/pUAUiCgC6inV/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/pUAUiCgC6inV/480.webp 640w"
+      },
+      "views": 943,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 65067283,
+        "live_stream_id": 69257074,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-14T12:41:31.000000Z",
+        "updated_at": "2025-08-21T13:21:59.000000Z",
+        "uuid": "44bcc968-2124-45b1-a826-f6ea69e74c4a",
+        "views": 943,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68951158,
+      "slug": "83600933-lord-of-the-mulas-dia-2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-12 12:29:54",
+      "session_title": "Lord of the Mulas Dia 2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-12 12:29:53",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 20621000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 48,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Dubkjp1J87qX/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Dubkjp1J87qX/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Dubkjp1J87qX/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Dubkjp1J87qX/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Dubkjp1J87qX/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Dubkjp1J87qX/480.webp 640w"
+      },
+      "views": 3651,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 6714,
+          "category_id": 1,
+          "name": "The Lord of the Rings: Return to Moria",
+          "slug": "the-lord-of-the-rings-return-to-moria",
+          "tags": ["Adventure"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 2,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/6714/banner/responsives/28c6d60d-fa21-4b4b-9b77-607201446360___banner_285_380.webp 285w, https://files.kick.com/images/subcategories/6714/banner/responsives/28c6d60d-fa21-4b4b-9b77-607201446360___banner_238_317.webp 238w",
+            "url": "https://files.kick.com/images/subcategories/6714/banner/28c6d60d-fa21-4b4b-9b77-607201446360"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64762998,
+        "live_stream_id": 68951158,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-12T12:29:54.000000Z",
+        "updated_at": "2025-08-21T10:06:23.000000Z",
+        "uuid": "cd4b67c7-f835-43e8-ba93-debd8e839e66",
+        "views": 3651,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68806519,
+      "slug": "4804a-lord-of-the-mulas-ep-01-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-11 13:59:54",
+      "session_title": "Lord of the Mulas EP 01 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-11 13:59:50",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 25806000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 43,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/l4igWqQwNGwe/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/l4igWqQwNGwe/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/l4igWqQwNGwe/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/l4igWqQwNGwe/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/l4igWqQwNGwe/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/l4igWqQwNGwe/480.webp 640w"
+      },
+      "views": 3636,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 6714,
+          "category_id": 1,
+          "name": "The Lord of the Rings: Return to Moria",
+          "slug": "the-lord-of-the-rings-return-to-moria",
+          "tags": ["Adventure"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 2,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/6714/banner/responsives/28c6d60d-fa21-4b4b-9b77-607201446360___banner_285_380.webp 285w, https://files.kick.com/images/subcategories/6714/banner/responsives/28c6d60d-fa21-4b4b-9b77-607201446360___banner_238_317.webp 238w",
+            "url": "https://files.kick.com/images/subcategories/6714/banner/28c6d60d-fa21-4b4b-9b77-607201446360"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64619165,
+        "live_stream_id": 68806519,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-11T13:59:55.000000Z",
+        "updated_at": "2025-08-21T16:52:05.000000Z",
+        "uuid": "9ed682c1-40cf-42a2-84e8-99c91e28b35c",
+        "views": 3636,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68638104,
+      "slug": "37f8b-legacy-dia-6-blast-bounty-2025-season-2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-10 09:44:41",
+      "session_title": "LEGACY - DIA 6 BLAST BOUNTY 2025 SEASON 2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-10 09:44:40",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 31195000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 118,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/YZaVpjyl0XXO/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/YZaVpjyl0XXO/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/YZaVpjyl0XXO/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/YZaVpjyl0XXO/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/YZaVpjyl0XXO/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/YZaVpjyl0XXO/480.webp 640w"
+      },
+      "views": 4757,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64451610,
+        "live_stream_id": 68638104,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-10T09:44:41.000000Z",
+        "updated_at": "2025-08-21T12:44:52.000000Z",
+        "uuid": "b7d10ba4-2e9f-460e-9c1a-660b396b9e85",
+        "views": 4757,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68634243,
+      "slug": "48bcb-pain-em-campo-blast-bounty-dia-6-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-10 08:24:31",
+      "session_title": "FreezeTime - BLAST Bounty Dia 6 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-10 08:24:30",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4619000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 29,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Vs96C8YGbbhp/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Vs96C8YGbbhp/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Vs96C8YGbbhp/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Vs96C8YGbbhp/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Vs96C8YGbbhp/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Vs96C8YGbbhp/480.webp 640w"
+      },
+      "views": 1208,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64447771,
+        "live_stream_id": 68634243,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-10T08:24:32.000000Z",
+        "updated_at": "2025-08-21T13:21:59.000000Z",
+        "uuid": "02087c8b-9df8-4a39-832c-b6df1507b9f7",
+        "views": 1208,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68476403,
+      "slug": "82739510-furia-x-liquid-dia-5-blast-bounty-2025-season-2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-09 09:46:23",
+      "session_title": "FURIA X LIQUID - DIA 5 BLAST BOUNTY 2025 SEASON 2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-09 09:46:22",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 47385000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 468,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Ah8gxQkAvtZh/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Ah8gxQkAvtZh/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Ah8gxQkAvtZh/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Ah8gxQkAvtZh/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Ah8gxQkAvtZh/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/Ah8gxQkAvtZh/480.webp 640w"
+      },
+      "views": 7270,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64290740,
+        "live_stream_id": 68476403,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-09T09:46:24.000000Z",
+        "updated_at": "2025-08-21T01:58:21.000000Z",
+        "uuid": "265c4dcb-c610-4891-9562-5a3790443f00",
+        "views": 7270,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68472807,
+      "slug": "3e064-freezetime-blast-bounty-dia-5-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-09 08:32:03",
+      "session_title": "FreezeTime - BLAST Bounty Dia 5 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-09 08:32:02",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4290000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 24,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/0hAltxWRde1G/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/0hAltxWRde1G/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/0hAltxWRde1G/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/0hAltxWRde1G/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/0hAltxWRde1G/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/0hAltxWRde1G/480.webp 640w"
+      },
+      "views": 863,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64287157,
+        "live_stream_id": 68472807,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-09T08:32:04.000000Z",
+        "updated_at": "2025-08-21T07:00:29.000000Z",
+        "uuid": "7d4725cc-feba-414b-9a36-70d2db8760e0",
+        "views": 863,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68311756,
+      "slug": "757d0-dia-4-blast-bounty-2025-s2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-08 08:57:47",
+      "session_title": "Dia 4 BLAST Bounty 2025 S2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-08 08:57:46",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 37243000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 126,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HUZt8HVJNdhi/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HUZt8HVJNdhi/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HUZt8HVJNdhi/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HUZt8HVJNdhi/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HUZt8HVJNdhi/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HUZt8HVJNdhi/480.webp 640w"
+      },
+      "views": 1890,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64126882,
+        "live_stream_id": 68311756,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-08T08:57:48.000000Z",
+        "updated_at": "2025-08-21T09:08:19.000000Z",
+        "uuid": "07147b9d-12a4-4097-ae1c-84b1c388237c",
+        "views": 1890,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68307795,
+      "slug": "767b7-freezetime-blast-bounty-dia-4-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-08 07:29:00",
+      "session_title": "FreezeTime - BLAST Bounty Dia 4 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-08 07:28:59",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4711000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 14,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ZZXitCRqRgNR/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ZZXitCRqRgNR/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ZZXitCRqRgNR/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ZZXitCRqRgNR/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ZZXitCRqRgNR/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ZZXitCRqRgNR/480.webp 640w"
+      },
+      "views": 780,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 64122938,
+        "live_stream_id": 68307795,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-08T07:29:01.000000Z",
+        "updated_at": "2025-08-21T09:08:19.000000Z",
+        "uuid": "0feb0313-496f-431b-b525-6bee1f485477",
+        "views": 780,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68145754,
+      "slug": "720dc-furia-pain-e-legacy-dia-3-blast-bounty-2025-season-2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-07 09:42:40",
+      "session_title": "Furia Pain e Legacy - DIA 3 BLAST BOUNTY 2025 SEASON 2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-07 09:42:39",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 42034000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 272,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/cUgeMwRDgCLK/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/cUgeMwRDgCLK/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/cUgeMwRDgCLK/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/cUgeMwRDgCLK/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/cUgeMwRDgCLK/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/cUgeMwRDgCLK/480.webp 640w"
+      },
+      "views": 4350,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63961694,
+        "live_stream_id": 68145754,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-07T09:42:41.000000Z",
+        "updated_at": "2025-08-21T01:58:22.000000Z",
+        "uuid": "d42d99ce-376b-4313-b97a-bcdc99e7f889",
+        "views": 4350,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 68141406,
+      "slug": "50206-freezetime-blast-bounty-dia-3-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-07 08:22:19",
+      "session_title": "FreezeTime - BLAST Bounty Dia 3! - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-07 08:22:19",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4696000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 455,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ihBDVhnQIQh4/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ihBDVhnQIQh4/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ihBDVhnQIQh4/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ihBDVhnQIQh4/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ihBDVhnQIQh4/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/ihBDVhnQIQh4/480.webp 640w"
+      },
+      "views": 1260,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63957372,
+        "live_stream_id": 68141406,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-07T08:22:20.000000Z",
+        "updated_at": "2025-08-21T09:08:19.000000Z",
+        "uuid": "95fb6efa-0caa-4640-9682-b5aec8a583dc",
+        "views": 1260,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67989316,
+      "slug": "62f43-dia-2-blast-bounty-2025-season-2-socio-vote-ao-vivo-com-gaules",
+      "channel_id": 67262278,
+      "created_at": "2025-08-06 09:46:47",
+      "session_title": "DIA 2 BLAST BOUNTY 2025 SEASON 2 - !socio !vote - AO VIVO COM GAULES",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-06 09:46:45",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 40437000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 84,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/7NGGDfsgudAN/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/7NGGDfsgudAN/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/7NGGDfsgudAN/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/7NGGDfsgudAN/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/7NGGDfsgudAN/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/7NGGDfsgudAN/480.webp 640w"
+      },
+      "views": 2069,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63806135,
+        "live_stream_id": 67989316,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-06T09:46:48.000000Z",
+        "updated_at": "2025-08-21T09:08:20.000000Z",
+        "uuid": "20666151-b462-43b8-b75b-0521b78ac84a",
+        "views": 2069,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67985237,
+      "slug": "d01b2-freezetime-blast-bounty-dia-2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-06 08:22:07",
+      "session_title": "FreezeTime BLAST Bounty Dia 2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-06 08:22:06",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4711000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 33,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/yHW1oFoCHUFU/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/yHW1oFoCHUFU/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/yHW1oFoCHUFU/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/yHW1oFoCHUFU/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/yHW1oFoCHUFU/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/yHW1oFoCHUFU/480.webp 640w"
+      },
+      "views": 597,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63802075,
+        "live_stream_id": 67985237,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-06T08:22:07.000000Z",
+        "updated_at": "2025-08-20T03:28:33.000000Z",
+        "uuid": "acb8a276-759b-479a-b2d7-c6b798805860",
+        "views": 597,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67830094,
+      "slug": "16886699-dia-1-blast-bounty-2025-season-2-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-05 09:53:45",
+      "session_title": "DIA 1 BLAST BOUNTY 2025 SEASON 2 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-05 09:53:44",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 38966000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 133,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XH6dSu7WtMGt/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XH6dSu7WtMGt/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XH6dSu7WtMGt/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XH6dSu7WtMGt/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XH6dSu7WtMGt/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XH6dSu7WtMGt/480.webp 640w"
+      },
+      "views": 1183,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63634422,
+        "live_stream_id": 67830094,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-05T09:53:46.000000Z",
+        "updated_at": "2025-08-21T07:00:42.000000Z",
+        "uuid": "bbdacad1-dff7-4f18-ae47-e986b4cdfb5b",
+        "views": 1183,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67827090,
+      "slug": "25028-freezetime-blast-bounty-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-05 08:44:40",
+      "session_title": "FreezeTime BLAST Bounty - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-05 08:44:40",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 3979000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 17,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HCHePsihWxem/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HCHePsihWxem/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HCHePsihWxem/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HCHePsihWxem/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HCHePsihWxem/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/HCHePsihWxem/480.webp 640w"
+      },
+      "views": 464,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63631434,
+        "live_stream_id": 67827090,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-05T08:44:41.000000Z",
+        "updated_at": "2025-08-21T14:39:06.000000Z",
+        "uuid": "a44997a8-3fb7-47b1-8314-c3fe361328eb",
+        "views": 464,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67502998,
+      "slug": "72873925-grande-final-spirit-x-mouz-iem-cologne-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-03 14:04:56",
+      "session_title": "GRANDE FINAL - SPIRIT X MOUZ - IEM COLOGNE - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-03 14:04:53",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 16988000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 498,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WMVeTmnl9Tfk/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WMVeTmnl9Tfk/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WMVeTmnl9Tfk/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WMVeTmnl9Tfk/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WMVeTmnl9Tfk/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/WMVeTmnl9Tfk/480.webp 640w"
+      },
+      "views": 2358,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63365997,
+        "live_stream_id": 67502998,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-03T14:04:57.000000Z",
+        "updated_at": "2025-08-21T08:33:37.000000Z",
+        "uuid": "77b4409f-a841-4ffd-8e4c-a94b8d860fd4",
+        "views": 2358,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67496660,
+      "slug": "0651e-freeze-time-grande-final-iem-cologne-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-03 12:56:13",
+      "session_title": "FREEZE TIME - GRANDE FINAL IEM COLOGNE - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-03 12:56:13",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 3932000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 40,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/VIxqBkJ1a9qW/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/VIxqBkJ1a9qW/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/VIxqBkJ1a9qW/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/VIxqBkJ1a9qW/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/VIxqBkJ1a9qW/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/VIxqBkJ1a9qW/480.webp 640w"
+      },
+      "views": 1082,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63359684,
+        "live_stream_id": 67496660,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-03T12:56:14.000000Z",
+        "updated_at": "2025-08-21T01:58:24.000000Z",
+        "uuid": "b1407f44-7b03-467b-b869-88cfc56ade0a",
+        "views": 1082,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67340872,
+      "slug": "57286063-iem-cologne-semifinais-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-02 13:04:13",
+      "session_title": "IEM COLOGNE - SEMIFINAIS - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-02 13:04:13",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 25152000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 392,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/oF80TFJ8GKKL/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/oF80TFJ8GKKL/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/oF80TFJ8GKKL/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/oF80TFJ8GKKL/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/oF80TFJ8GKKL/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/oF80TFJ8GKKL/480.webp 640w"
+      },
+      "views": 3065,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63204653,
+        "live_stream_id": 67340872,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-02T13:04:14.000000Z",
+        "updated_at": "2025-08-20T17:23:34.000000Z",
+        "uuid": "8438a0bb-3e5f-4736-903a-8e97810c4f97",
+        "views": 3065,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67335678,
+      "slug": "dbba4-freeze-time-iem-cologne-semifinais-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-02 11:44:57",
+      "session_title": "FREEZE TIME - IEM COLOGNE SEMIFINAIS - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-02 11:44:56",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 4578000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 36,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/CywxCSQkYZDG/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/CywxCSQkYZDG/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/CywxCSQkYZDG/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/CywxCSQkYZDG/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/CywxCSQkYZDG/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/CywxCSQkYZDG/480.webp 640w"
+      },
+      "views": 884,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63199482,
+        "live_stream_id": 67335678,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-02T11:44:57.000000Z",
+        "updated_at": "2025-08-20T13:57:41.000000Z",
+        "uuid": "bcb4df19-c766-4e56-97eb-964f938963d4",
+        "views": 884,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67186434,
+      "slug": "24ead-furia-vs-mouz-iem-cologne-quartas-de-final-socio-vote-ao-vivo-com-gaules",
+      "channel_id": 67262278,
+      "created_at": "2025-08-01 12:34:32",
+      "session_title": "FURIA vs MOUZ - IEM COLOGNE - QUARTAS DE FINAL - !socio !vote - AO VIVO COM GAULES",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-01 12:34:31",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 32304000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 596,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XDAW6cQNq3UP/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XDAW6cQNq3UP/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XDAW6cQNq3UP/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XDAW6cQNq3UP/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XDAW6cQNq3UP/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/XDAW6cQNq3UP/480.webp 640w"
+      },
+      "views": 9519,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63051017,
+        "live_stream_id": 67186434,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-01T12:34:33.000000Z",
+        "updated_at": "2025-08-21T09:08:36.000000Z",
+        "uuid": "323f5cf1-f743-4fd5-b7d9-52b972808638",
+        "views": 9519,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    },
+    {
+      "id": 67182062,
+      "slug": "382df-freeze-time-iem-cologne-dia-8-socio-vote-siga-at-gaules-nas-redes-sociais",
+      "channel_id": 67262278,
+      "created_at": "2025-08-01 11:25:08",
+      "session_title": "FREEZE TIME - IEM COLOGNE DIA 8 - !socio !vote - Siga @Gaules nas redes sociais!",
+      "is_live": false,
+      "risk_level_id": null,
+      "start_time": "2025-08-01 11:25:06",
+      "source": "",
+      "twitch_channel": null,
+      "duration": 3999000,
+      "language": "Portuguese",
+      "is_mature": false,
+      "viewer_count": 102,
+      "thumbnail": {
+        "src": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/2rO9gaRYB8Tb/720.webp",
+        "srcset": "https://images.kick.com/video_thumbnails/dvkGqjenUGAB/2rO9gaRYB8Tb/1080.webp 1920w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/2rO9gaRYB8Tb/720.webp 1280w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/2rO9gaRYB8Tb/360.webp 480w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/2rO9gaRYB8Tb/160.webp 284w, https://images.kick.com/video_thumbnails/dvkGqjenUGAB/2rO9gaRYB8Tb/480.webp 640w"
+      },
+      "views": 1089,
+      "lang_iso": "pt",
+      "tags": [],
+      "categories": [
+        {
+          "id": 1552,
+          "category_id": 1,
+          "name": "Counter-Strike 2",
+          "slug": "counter-strike-2",
+          "tags": ["Shooter", "Tactical"],
+          "description": null,
+          "deleted_at": null,
+          "is_mature": false,
+          "is_promoted": false,
+          "viewers": 24588,
+          "is_fallback": false,
+          "banner": {
+            "responsive": "https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_600_800.webp 600w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_501_668.webp 501w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_420_560.webp 420w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_351_468.webp 351w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_294_392.webp 294w, https://files.kick.com/images/subcategories/1552/banner/responsives/555d5ee4-5863-4546-8c4c-6ebca28dc60d___banner_245_327.webp 245w",
+            "url": "https://files.kick.com/images/subcategories/1552/banner/555d5ee4-5863-4546-8c4c-6ebca28dc60d"
+          },
+          "category": {
+            "id": 1,
+            "name": "Games",
+            "slug": "games",
+            "icon": "\ud83d\udd79\ufe0f"
+          }
+        }
+      ],
+      "video": {
+        "id": 63046667,
+        "live_stream_id": 67182062,
+        "slug": null,
+        "thumb": null,
+        "s3": null,
+        "trading_platform_id": null,
+        "created_at": "2025-08-01T11:25:09.000000Z",
+        "updated_at": "2025-08-17T19:46:36.000000Z",
+        "uuid": "ce0b2ddf-f1dd-45ea-9aae-250fb1c61a81",
+        "views": 1089,
+        "deleted_at": null,
+        "is_pruned": false,
+        "is_private": false,
+        "status": "public"
+      }
+    }
+  ],
+  "verified": {
+    "id": 14262,
+    "channel_id": 67262278,
+    "created_at": "2025-07-12T00:23:37.000000Z",
+    "updated_at": "2025-07-12T00:23:37.000000Z"
+  },
+  "media": [
+    {
+      "id": 116402920,
+      "model_type": "App\\Models\\Channel",
+      "model_id": 67262278,
+      "collection_name": "banner_image",
+      "name": "96109b18-3f7d-4375-8332-093968e6f55e",
+      "file_name": "96109b18-3f7d-4375-8332-093968e6f55e",
+      "mime_type": "image/jpeg",
+      "disk": "s3",
+      "size": 145684,
+      "manipulations": [],
+      "custom_properties": {
+        "generated_conversions": { "fullsize": true, "medium": true }
+      },
+      "responsive_images": [],
+      "order_column": 90153304,
+      "created_at": "2025-07-16T16:50:10.000000Z",
+      "updated_at": "2025-07-16T16:50:12.000000Z",
+      "uuid": "1e2049e1-32bc-4c49-9e08-b01cc12c8158",
+      "conversions_disk": "s3"
+    },
+    {
+      "id": 116410667,
+      "model_type": "App\\Models\\Channel",
+      "model_id": 67262278,
+      "collection_name": "offline_banner",
+      "name": "50d279c9-fc28-497d-bff0-b7df634b7bae",
+      "file_name": "50d279c9-fc28-497d-bff0-b7df634b7bae",
+      "mime_type": "image/png",
+      "disk": "s3",
+      "size": 2840723,
+      "manipulations": [],
+      "custom_properties": { "generated_conversions": { "fullsize": true } },
+      "responsive_images": {
+        "fullsize": {
+          "urls": [
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_1200_675.webp",
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_1003_564.webp",
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_839_472.webp",
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_702_395.webp",
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_587_330.webp",
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_491_276.webp",
+            "50d279c9-fc28-497d-bff0-b7df634b7bae___fullsize_411_231.webp"
+          ],
+          "base64svg": "data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMCA2NzUiPgoJPGltYWdlIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FFZ0FnQXdFaUFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEErSk5FOGVSNlplS0x0dzhaNml0ZVR4UmE2N2VlUmFzSTRuUEpOZUtTd3ZjeXBoem5QclhRK1JKbzFwSE9rbnpZN0d2bk1SaEtkT2ZORFJzK2RuaElPYW5mVTlzdWRQMGZSTks4NzdjcjNPTTdRYTVKUGl2Y2FkSzBTTjhtZURYQ3c2eVp3SGtjdG5yazFrYXBkd21RbFRYdTViV3hHR2c0em0yWjFNSFNxeTkrSm54RWlkZnJXdHFqRTJTNUpQSHJSUlhMaVBqaWVtOTBVYlUvdUt5dFRKM1VVVjFRTlkvRWYvL1oiPgoJPC9pbWFnZT4KPC9zdmc+"
+        }
+      },
+      "order_column": 90160753,
+      "created_at": "2025-07-16T17:43:31.000000Z",
+      "updated_at": "2025-07-16T17:43:34.000000Z",
+      "uuid": "cb6b9890-7dfb-4066-9624-3ece4355c121",
+      "conversions_disk": "s3"
+    }
+  ]
+}
