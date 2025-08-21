@@ -76,18 +76,75 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Conexão estabelecida com sucesso!");
 
 
-    while let Some(msg) = read.next().await {
-        match msg? {
-            Message::Text(text) => {
-                println!("Mensagem recebida: {}", text);
+    // Supondo que você tenha um loop para receber mensagens
+// e já definiu as structs (OuterMessage, ChatMessage, etc.)
+
+// ...
+// let (mut write, mut read) = ws_stream.split();
+// ...
+
+while let Some(message) = read.next().await {
+    match message {
+        Ok(msg) => {
+            match msg {
+                Message::Text(text) => {
+                    // ✅ AQUI É ONDE A MÁGICA ACONTECE
+                    println!("\n📥 Mensagem de texto recebida!");
+
+                    // 1. Primeiro Parse (mensagem externa)
+                    if let Ok(outer_message) = serde_json::from_str::<OuterMessage>(&text) {
+                        
+                        // Verificamos se é um evento de chat antes de continuar
+                        if outer_message.event == "App\\Events\\ChatMessageEvent" {
+                        
+                            // 2. Segundo Parse (mensagem interna/aninhada)
+                            if let Ok(chat_message) = serde_json::from_str::<ChatMessage>(&outer_message.data) {
+                                
+                                // 3. Acessar os componentes!
+                                println!("💬 [{}] {}: {}", 
+                                    chat_message.created_at,
+                                    chat_message.sender.username,
+                                    chat_message.content
+                                );
+
+                            } else {
+                                eprintln!("❌ Erro: Não foi possível fazer o parse da mensagem de chat interna (data).");
+                            }
+                        } else {
+                            // Opcional: lidar com outros tipos de eventos (ex: confirmação de inscrição)
+                            println!("ℹ️  Recebido evento do tipo: {}", outer_message.event);
+                        }
+
+                    } else {
+                        eprintln!("❌ Erro: Não foi possível fazer o parse da mensagem externa.");
+                    }
+                }
+                Message::Binary(bin) => {
+                    println!("📥 Mensagem binária recebida: {:?}", bin);
+                }
+                Message::Ping(_) => {
+                    // O tungstenite geralmente responde a Pings automaticamente
+                    println!("➡️  Ping recebido.");
+                }
+                Message::Pong(_) => {
+                    println!("⬅️  Pong recebido.");
+                }
+                Message::Close(_) => {
+                    println!("🔌 Conexão fechada pelo servidor.");
+                    break; // Sai do loop
+                }
+                _ => {
+                    
+                }
             }
-            Message::Close(_) => {
-                println!("Conexão fechada pelo servidor.");
-                break;
-            }
-            _ => {}
+        }
+        Err(e) => {
+            eprintln!("❌ Erro ao receber mensagem: {}", e);
+            break;
         }
     }
+}
 
     Ok(())
 }
+
