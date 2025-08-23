@@ -1,8 +1,10 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![warn(unused_crate_dependencies)]
 
 use std::collections::HashMap;
 use std::sync::Mutex;
+use rustls as _;
 
 mod commands;
 mod models;
