@@ -96,27 +96,6 @@
   });
 </script>
 
-<svelte:head>
-  <style>
-    :global(body) {
-      background-color: #111827;
-      color: #d1d5db;
-      font-family:
-        "Inter",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    }
-  </style>
-</svelte:head>
-
 <main class="container">
   <div class="connect-form">
     <input bind:value={newChannelName} placeholder="Nome do Canal" />
@@ -128,7 +107,7 @@
     <button on:click={addChatTab}>Conectar</button>
   </div>
 
-  <header>
+  <header class="header">
     <nav>
       <ul>
         {#each tabs as tab (tab.id)}
@@ -156,15 +135,44 @@
 
 <style>
   .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
     padding: 1rem;
-    max-width: 90%;
-    max-height: 100%;
-    margin: auto;
+  }
+
+  .tabs-content {
+    flex-grow: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #374151;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .tab-pane {
+    display: none;
+  }
+
+  .tab-pane.active {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+  }
+
+  .header,
+  .connect-form {
+    flex-shrink: 0;
   }
   .connect-form {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
   }
   .connect-form input {
     flex-grow: 1;
@@ -181,27 +189,11 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: 400;
+    font-weight: 500;
     transition: background-color 0.2s;
   }
   .connect-form button:hover {
     background-color: #2563eb;
-  }
-  .tabs-content {
-    border: 1px solid #374151;
-    border-top: none;
-    /* min-height: 80vh; */
-    display: grid;
-    border-radius: 0 0 6px 6px;
-  }
-  .tab-pane {
-    grid-area: 1 / 1;
-    visibility: hidden;
-    opacity: 0;
-  }
-  .tab-pane.active {
-    visibility: visible;
-    opacity: 1;
   }
   header {
     background-color: transparent;
@@ -228,7 +220,7 @@
     margin-bottom: -1px;
   }
   li.active {
-    background-color: #111827; /* Cor de fundo do chat */
+    background-color: #111827;
     border-color: #374151;
     border-bottom-color: #111827;
   }
