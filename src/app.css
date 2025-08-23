@@ -1,0 +1,37 @@
+:root {
+  --cor-fundo-principal: #111827;
+  --cor-fundo-secundaria: #1f2937;
+  --cor-texto-principal: #d1d5db;
+  --cor-texto-secundaria: #9ca3af;
+  --cor-destaque: #3b82f6;
+  --fonte-principal: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--cor-fundo-principal);
+  color: var(--cor-texto-principal);
+  font-family: var(--fonte-principal);
+  overflow: hidden;
+}
+
+--- */ button {
+  cursor: pointer;
+  font-family: var(--fonte-principal);
+}
+
+input {
+  font-family: var(--fonte-principal);
+}
