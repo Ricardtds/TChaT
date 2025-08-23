@@ -1,16 +1,13 @@
 [package]
-name = "tchat"
+name = "t_chat"
 version = "0.1.0"
-description = "Um aplicativo de chat multi-abas com Tauri e Svelte"
+description = "T Chat: Um cliente de chat de alta performance para a Kick. Construído com Rust e Tauri, ele usa Svelte para uma interface de usuário rápida e responsiva."
 authors = ["Ricardo Teixeira dos Santos"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-# The `_lib` suffix may seem redundant but it is necessary
-# to make the lib name unique and wouldn't conflict with the bin name.
-# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
 name = "tchat_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
@@ -18,8 +15,8 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = [] }
-tauri-plugin-opener = "2"
+tauri = { version = "2.8.2", features = [] }
+tauri-plugin-opener = "2.5.0"
 
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
@@ -29,19 +26,17 @@ tokio-tungstenite = { version = "0.27.0", features = [
     "rustls-tls-webpki-roots",
 ] }
 tokio-util = "0.7.16"
-once_cell = { version = "*" }
+# once_cell = { version = "*" }
 rustls = { version = "0.23", features = ["aws-lc-rs"] }
-url = "2.5.6"
-reqwest = { version = "0.12", features = ["json", "cookies", "brotli", "gzip"] }
+# url = "2.5.6"
+# reqwest = { version = "0.12", features = ["json", "cookies", "brotli", "gzip"] }
 futures-util = "0.3.31"
-futures-channel = "0.3" # Versão atual
-# (Opcional, mas Altamente Recomendado) Para Logging Profissional
-# Substitui o `println!` por um sistema de logs mais robusto.
-log = "0.4"
-env_logger = "0.11"
+# futures-channel = "0.3"
+# log = "0.4"
+# env_logger = "0.11"
 tauri-plugin-store = "2"
 [features]
-# this feature is used for production builds or when `devPath` points to the filesystem
+
 # DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
 
