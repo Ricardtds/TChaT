@@ -101,7 +101,7 @@
     const scrollHeight = chatWindowElement.scrollHeight;
     const clientHeight = chatWindowElement.clientHeight;
 
-    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 5;
+    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 35;
 
     if (isAtBottom) {
       userHasScrolledUp = false;
