@@ -2,7 +2,7 @@
   import { listen, type UnlistenFn } from "@tauri-apps/api/event";
   import { onMount, tick } from "svelte";
 
-  // --- Interfaces (sem mudanças) ---
+  // --- Interfaces ---
   interface Identity {
     color: string;
     badges: any[];
@@ -22,45 +22,37 @@
     sender: Sender;
   }
 
-  // --- Props e Estado ---
+  // --- Props ---
   export let channelId: string;
   export let initialMessages: ChatMessage[] = [];
 
+  // --- Estado do Componente ---
   let messages: ChatMessage[] = initialMessages;
   let unlisten: UnlistenFn;
   let chatWindowElement: HTMLDivElement;
   let messageElements: HTMLElement[] = [];
 
-  // --- Estado da Lógica de Scroll ---
+  // Estado para a lógica de scroll
   let userHasScrolledUp = false;
   let newMessagesCount = 0;
   let isResumingScroll = false;
   let firstNewMessageIndex: number | null = null;
-
-  // --- NOVOS ESTADOS DE CONTROLE ---
-  // Trava para ignorar eventos de scroll causados pelo auto-scroll
   let isAutoScrolling = false;
-  // Guarda a última posição do scroll para detectar a direção do movimento
   let lastScrollTop = 0;
 
   /**
    * Rola a janela de chat para o fundo.
    */
   async function scrollToBottom(behavior: "smooth" | "auto" = "auto") {
-    // ATIVA A TRAVA para que o handleScroll ignore este evento
     isAutoScrolling = true;
-
     await tick();
     if (chatWindowElement) {
       chatWindowElement.scroll({
         top: chatWindowElement.scrollHeight,
         behavior,
       });
-      // Atualiza nossa referência da última posição
       lastScrollTop = chatWindowElement.scrollTop;
     }
-
-    // Libera a trava após um pequeno delay para garantir que o evento de scroll já passou
     setTimeout(() => {
       isAutoScrolling = false;
     }, 100);
@@ -79,9 +71,7 @@
       unlisten = await listen<ChatMessage>("new-chat-message", (event) => {
         if (event.payload.chatroomId.toString() === channelId) {
           const isAtBottomBeforeUpdate = !userHasScrolledUp;
-
           messages = [...messages, event.payload];
-
           if (userHasScrolledUp) {
             if (firstNewMessageIndex === null) {
               firstNewMessageIndex = messages.length - 1;
@@ -102,80 +92,64 @@
   });
 
   /**
-   * Função de scroll, agora mais inteligente.
+   * Função executada no evento de scroll para controlar a lógica do contador.
    */
-  // Substitua sua função handleScroll por esta
   function handleScroll() {
-    // Ignora eventos de scroll causados pelo nosso próprio código
     if (isAutoScrolling || isResumingScroll || !chatWindowElement) return;
 
     const currentScrollTop = chatWindowElement.scrollTop;
     const scrollHeight = chatWindowElement.scrollHeight;
     const clientHeight = chatWindowElement.clientHeight;
 
-    // Usamos um buffer pequeno para a detecção de "fundo"
-    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 1;
+    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 5;
 
     if (isAtBottom) {
       userHasScrolledUp = false;
       newMessagesCount = 0;
       firstNewMessageIndex = null;
     } else {
-      // Só ativa o modo "rolou para cima" se o movimento foi de fato para cima
       if (currentScrollTop < lastScrollTop) {
         userHasScrolledUp = true;
       }
-
-      // Se não há novas mensagens para rastrear, não faz nada.
       if (firstNewMessageIndex === null) return;
 
-      // --- LÓGICA DE CONTAGEM REINSERIDA AQUI ---
       const chatWindowRect = chatWindowElement.getBoundingClientRect();
       let lastVisibleMessageIndex = -1;
-
-      // Itera sobre as mensagens de baixo para cima.
       for (let i = messageElements.length - 1; i >= firstNewMessageIndex; i--) {
         const messageEl = messageElements[i];
         if (messageEl) {
           const rect = messageEl.getBoundingClientRect();
-          // Se o topo da mensagem está visível na janela, encontramos nossa referência.
           if (rect.top < chatWindowRect.bottom) {
             lastVisibleMessageIndex = i;
             break;
           }
         }
       }
-
       if (lastVisibleMessageIndex !== -1) {
         const remaining = messages.length - (lastVisibleMessageIndex + 1);
         newMessagesCount = Math.max(0, remaining);
       } else {
         newMessagesCount = messages.length - firstNewMessageIndex;
       }
-      // --- FIM DA LÓGICA DE CONTAGEM ---
     }
-
-    // Atualiza a última posição do scroll no final
     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
   }
 
   /**
-   * Chamado ao clicar no botão "Voltar para o final".
+   * Chamado ao clicar no botão "Voltar para o final / Novas Mensagens".
    */
   function resumeAutoScroll() {
     isResumingScroll = true;
     userHasScrolledUp = false;
     newMessagesCount = 0;
     firstNewMessageIndex = null;
-
     scrollToBottom("smooth");
-
     setTimeout(() => {
       isResumingScroll = false;
     }, 500);
   }
 
-  // --- Funções de Utilidade (sem mudanças) ---
+  // --- Funções de Utilidade ---
   function throttle<T extends (...args: any[]) => any>(
     func: T,
     limit: number
@@ -228,7 +202,7 @@
   {#if userHasScrolledUp}
     <div class="scroll-button-container">
       <button
-        on:click={resumeAutoScroll}
+        onclick={resumeAutoScroll}
         class:new-messages={newMessagesCount > 0}
       >
         {#if newMessagesCount > 0}
@@ -271,6 +245,7 @@
     font-size: 14px;
     flex-grow: 1;
     width: 100%;
+    min-height: 0;
     overflow-y: scroll;
   }
 
@@ -302,18 +277,18 @@
   }
 
   .scroll-button-container button.new-messages {
-    background-color: #ef4444; /* Vermelho para novas mensagens */
+    background-color: #ef4444;
     animation: pulse 1.5s infinite;
   }
 
   @keyframes pulse {
     0%,
     100% {
-      transform: scale(1) translateX(-50%);
+      transform: scale(1);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     50% {
-      transform: scale(1.05) translateX(-48%);
+      transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
     }
   }
