@@ -25,7 +25,7 @@
       tabs.find((t) => t.id === newChatroomId)
     ) {
       console.warn(
-        "Nome do canal e ID da sala são obrigatórios e o ID não pode ser duplicado.",
+        "Nome do canal e ID da sala são obrigatórios e o ID não pode ser duplicado."
       );
       return;
     }
@@ -53,7 +53,7 @@
     } catch (e) {
       console.error(
         `Erro ao tentar desconectar do chatroom ${tabIdToClose}:`,
-        e,
+        e
       );
     }
 
@@ -78,7 +78,7 @@
         .catch((e) => {
           console.error(`Falha ao reconectar ao chatroom ${tab.id}:`, e);
           return { ...tab, status: "failure" as const };
-        }),
+        })
     );
 
     const results = await Promise.all(connectionPromises);
@@ -118,13 +118,8 @@
 </svelte:head>
 
 <main class="container">
-  <h1 class="title">Tauri Multi-Chat</h1>
-
   <div class="connect-form">
-    <input
-      bind:value={newChannelName}
-      placeholder="Nome do Canal (ex: Gaules)"
-    />
+    <input bind:value={newChannelName} placeholder="Nome do Canal" />
     <input
       bind:value={newChatroomId}
       placeholder="ID da Sala de Chat"
@@ -162,13 +157,9 @@
 <style>
   .container {
     padding: 1rem;
-    max-width: 900px;
+    max-width: 90%;
+    max-height: 100%;
     margin: auto;
-  }
-  .title {
-    text-align: center;
-    color: #e5e7eb;
-    margin-bottom: 2rem;
   }
   .connect-form {
     display: flex;
@@ -190,7 +181,7 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 400;
     transition: background-color 0.2s;
   }
   .connect-form button:hover {
@@ -199,7 +190,7 @@
   .tabs-content {
     border: 1px solid #374151;
     border-top: none;
-    min-height: 60vh;
+    /* min-height: 80vh; */
     display: grid;
     border-radius: 0 0 6px 6px;
   }
