@@ -93,7 +93,7 @@ O executável e o instalador serão gerados em `src-tauri/target/release/`.
 
 ---
 
-## **[➡️ Acesse o Roadmap do TChaT Aqui](https://github.com/Ricardtds/TChaT)**
+## **[➡️ Acesse o Roadmap do TChaT Aqui](https://github.com/users/Ricardtds/projects/2)**
 
 ### 🔄 Nosso Fluxo de Trabalho (Workflow)
 
