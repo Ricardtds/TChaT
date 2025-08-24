@@ -182,3 +182,63 @@ pub async fn cleanup_messages(pool: &Pool<sqlx::Sqlite>, chatroom_id: &String, k
     }
     Ok(())
 }
+#[derive(sqlx::FromRow, Debug)]
+struct MessageRow {
+    id: String,
+    chatroom_id: i64,
+    content: String,
+    created_at: String,
+    sender_id: i64,
+    username: String,
+    slug: String,
+    color: String,
+}
+#[tauri::command]
+pub async fn get_chat_history(
+    chatroom_id: String,
+    db_pool: State<'_, SqlitePool>,
+) -> Result<Vec<AppChatMessage>, String> {
+    println!("[RUST]: Buscando histórico de mensagens para o chat {}", &chatroom_id);
+
+    let pool = db_pool.inner(); 
+    let rows: Result<Vec<MessageRow>, sqlx::Error> = sqlx::query_as("SELECT 
+       messages.id, messages.chatroom_id, messages.content, messages.created_at,
+       senders.id AS sender_id, senders.username, senders.slug, senders.color
+        FROM messages
+        INNER JOIN senders ON messages.sender_id = senders.id
+        WHERE messages.chatroom_id = ?
+        ORDER BY datetime(messages.created_at) ASC
+        LIMIT 500")
+        .bind(chatroom_id)
+        .fetch_all(pool)
+        .await;
+
+    let messages = match rows {
+        Ok(rows) => {
+            rows
+            .into_iter()
+            .map(|row| AppChatMessage {
+                id: row.id,
+                chatroom_id: row.chatroom_id as u64,
+                content: row.content,
+                created_at: row.created_at,
+                message_type: "message".into(),
+                sender: crate::models::app::AppSender {
+                    id: row.sender_id as u64,
+                    username: row.username,
+                    slug: row.slug,
+                    identity: crate::models::app::AppIdentity {
+                        color: row.color,
+                        badges: Vec::new(),
+                    },
+                },
+            }).collect()
+        }
+        Err(e) => {
+            eprintln!("Erro ao tentar pegar chat_history {:?}",e);
+            std::process::exit(0);
+        }
+    };
+   
+    Ok(messages)
+}
