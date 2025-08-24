@@ -1,6 +1,8 @@
 # T ChaT 💬
 
-Um cliente de chat para desktop leve e performático construído com Tauri, Rust e Svelte 5. Este projeto foi desenvolvido como uma exploração de tecnologias modernas para criar uma experiência de usuário fluida e eficiente em recursos.
+Um cliente de chat para a plataforma de lives [kick](https://kick.com/) para desktop/mobile leve e performático construído com Tauri, Rust e Svelte 5. Este projeto foi desenvolvido como uma exploração de tecnologias modernas para criar uma experiência de usuário fluida e eficiente em recursos.
+
+![Gif do cliente no desktop](./docs/TchaT.gif)
 
 ## 🚀 Principais Funcionalidades
 
@@ -34,7 +36,7 @@ Este projeto combina o poder do Rust no backend com a reatividade moderna do Sve
 
 * **[Svelte 5 (Runes)](https://svelte.dev/)**: Framework reativo para a construção da interface.
 * **[TypeScript](https://www.typescriptlang.org/)**: Para um código mais seguro e manutenível.
-* ~~**[Svelte Virtual List](https://github.com/sveltejs/svelte-virtual-list)**: Componente para a virtualização da lista de mensagens.~~
+* **[Svelte Virtual List](https://github.com/sveltejs/svelte-virtual-list)**: Componente para a virtualização da lista de mensagens.
 * **CSS puro**: Para estilização.
 
 ## ⚙️ Como Começar
@@ -91,60 +93,42 @@ O executável e o instalador serão gerados em `src-tauri/target/release/`.
 
 ---
 
-## ✅ To-Do e Roadmap do Projeto
+## **[➡️ Acesse o Roadmap do TChaT Aqui](https://github.com/Ricardtds/TChaT)**
 
-Esta lista acompanha o progresso do desenvolvimento do TChaT e os planos para futuras versões.
+### 🔄 Nosso Fluxo de Trabalho (Workflow)
 
-### Etapa 1: Fundação e Interface Principal
+O quadro é organizado nas seguintes colunas, representando o ciclo de vida de cada tarefa:
 
-* [x] **Estrutura do Projeto:** Configurar o ambiente Tauri com Rust no backend e Svelte 5 (Runes) no frontend.
+* **📥 Backlog / Ideias:** Novas ideias, sugestões de funcionalidades e tarefas ainda não priorizadas. É aqui que tudo começa.
+* **📝 A Fazer (To Do):** Tarefas que foram aprovadas, refinadas e estão prontas para serem desenvolvidas na próxima iteração.
+* **👨‍💻 Em Andamento (In Progress):** Tarefas que um contribuidor já está desenvolvendo ativamente.
+* **🔍 Em Revisão (In Review):** O desenvolvimento foi concluído e a tarefa está aguardando revisão de código (Code Review) através de um Pull Request.
+* **✅ Concluído (Done):** A tarefa foi revisada, aprovada, e o código foi integrado à base principal.
 
-* [x] **Interface com Abas:** Criar uma UI que permita ter múltiplos chats abertos em abas separadas.
-* [x] **Conexão de Chat:** Implementar a lógica para conectar a um novo canal de chat e exibi-lo em uma nova aba.
-* [x] **Layout Responsivo:** Garantir que a interface principal e o formulário de conexão se adaptem a diferentes tamanhos de janela.
+## 🤝 Como Contribuir
 
-### Etapa 2: Persistência e Gerenciamento de Estado
+Sua ajuda é muito bem-vinda! A melhor maneira de contribuir é através das Issues do GitHub.
 
-* [x] **Conexão Única de WebSocket:** Refatorar o backend para usar uma única conexão WebSocket para todos os canais, com inscrições dinâmicas.
+* **🐞 Reportar um Bug:** Encontrou um problema? [**Abra uma nova Issue**](https://github.com/Ricardtds/TChaT/issues/new/choose) usando o template de "Bug Report".
+* **💡 Sugerir uma Funcionalidade:** Tem uma ideia incrível? [**Abra uma nova Issue**](https://github.com/Ricardtds/TChaT/issues/new/choose) usando o template de "Feature Request".
 
-* [x] **Banco de Dados Local:** Configurar o `SQLx` com SQLite para salvar o histórico de mensagens localmente.
-* [x] **Persistência de Sessão:** Usar o `tauri-plugin-store` para salvar as abas abertas e sua ordem, recarregando-as ao iniciar o app.
-* [x] **Carregamento de Histórico:** Implementar o comando no Rust para buscar o histórico de um canal no banco e exibi-lo no frontend.
+As Issues aprovadas serão convertidas em cartões no nosso backlog para serem priorizadas.
 
-### Etapa 3: Experiência do Usuário (UX)
+Se você deseja trabalhar em uma tarefa existente:
 
-* [x] **Reordenação de Abas:** Implementar a funcionalidade de arrastar e soltar (`Drag and Drop`) para que as abas possam ser reordenadas pelo usuário.
+1. Encontre um cartão na coluna **"A Fazer"** que lhe interesse.
+2. Comente no cartão ou na Issue associada para que possamos atribuí-la a você.
+3. Mova o cartão para **"Em Andamento"**.
+4. Crie um Pull Request quando o trabalho estiver pronto e mova o cartão para **"Em Revisão"**.
 
-* [x] **Scroll Inteligente:** Otimizar o `ChatTab` para rolar automaticamente, mas parar de forma inteligente quando o usuário interage.
-* [x] **Notificação de Novas Mensagens:** Adicionar o botão "↓ Novas Mensagens" com um contador.
-* [x] **Contador Dinâmico:** Fazer o contador de novas mensagens diminuir à medida que o usuário rola para baixo e as visualiza.
-* [x] **Rolagem Horizontal das Abas:** Adicionar scroll horizontal na barra de abas e permitir o uso da roda do mouse.
-* [x] **Popup para Adicionar Chat:** Mover o formulário de conexão para um popup para uma interface mais limpa.
+### 🗺️ Roadmap de Alto Nível
 
-* [x] **Ícone e Branding:** Criar um ícone personalizado para o aplicativo.
+Abaixo estão algumas das grandes funcionalidades que planejamos para o futuro do TChaT. Você pode encontrar os cartões detalhados para cada uma em nosso Kanban.
 
-### Etapa 4: Performance e Otimização
-
-* [x] **Backend Eficiente:** Centralizar o pool de conexões do banco de dados no estado do Tauri para melhor performance.
-
-* [x] **Limite de Mensagens em Memória:** Limitar o número de mensagens renderizadas no Svelte para controlar o uso de RAM.
-* [x] **Frontend Otimizado:** Implementar "throttling" no evento de scroll para garantir uma interface sempre fluida.
-
-### 🚀 Próximos Passos (Roadmap Futuro)
-
-* [ ] **Virtualização da Lista de Chat:** Substituir o `{#each}` padrão por uma lista virtualizada (usando `svelte-virtual-list` ou uma implementação nativa) para garantir performance excepcional com históricos de chat muito grandes.
-
-* [ ] **Notificações Nativas:** Usar a API de notificações do Tauri para alertar o usuário sobre novas mensagens quando o aplicativo estiver em segundo plano.
-
-* [ ] **Configurações do Usuário:** Criar uma nova aba ou janela de "Configurações" onde o usuário possa:
-  * Alterar o tema (claro/escuro).
-  * Definir o número máximo de mensagens a serem guardadas no histórico.
-  * Limpar o cache ou o banco de dados de um canal específico.
-* [ ] **Suporte a Emotes de Terceiros:** Adicionar suporte para pacotes de emotes populares como BTTV ou 7TV.
-* [ ] **Busca no Histórico:** Implementar uma funcionalidade de busca (`Ctrl+F`) para encontrar mensagens no histórico de um canal.
-* [ ] **Melhorias de Acessibilidade (A11y):** Revisar todo o aplicativo para garantir que seja totalmente navegável e utilizável via teclado.
-* [ ] **Internacionalização (i18n):** Preparar o aplicativo para ser traduzido para outros idiomas.
-* [ ] **Auto-Update:** Configurar o "updater" do Tauri para que o aplicativo possa se atualizar automaticamente para novas versões.
+* [ ] **Notificações Nativas:** Alertas de novas mensagens quando o app estiver em segundo plano.
+* [ ] **Configurações do Usuário:** Uma tela para customizar a aparência e o comportamento do app.
+* [ ] **Busca no Histórico:** Ferramenta para pesquisar mensagens antigas.
+* [ ] **Auto-Update:** Implementar o atualizador do Tauri para novas versões.
 
 ## 📄 Licença
 
