@@ -1,6 +1,7 @@
 <script lang="ts">
   import { listen, type UnlistenFn } from "@tauri-apps/api/event";
   import { onMount, tick } from "svelte";
+  import Database from "@tauri-apps/plugin-sql";
 
   // --- Interfaces ---
   interface Identity {
@@ -22,27 +23,31 @@
     sender: Sender;
   }
 
-  // --- Props ---
-  export let channelId: string;
-  export let initialMessages: ChatMessage[] = [];
+  // --- Props (Svelte 5) ---
+  const {
+    channelId,
+    active,
+    initialMessages = [],
+  } = $props<{
+    channelId: string;
+    active: boolean;
+    initialMessages?: ChatMessage[];
+  }>();
 
   // --- Estado do Componente ---
-  let messages: ChatMessage[] = initialMessages;
+  let messages = $state<ChatMessage[]>(initialMessages);
   let unlisten: UnlistenFn;
   let chatWindowElement: HTMLDivElement;
   let messageElements: HTMLElement[] = [];
 
-  // Estado para a lógica de scroll
-  let userHasScrolledUp = false;
-  let newMessagesCount = 0;
+  let userHasScrolledUp = $state(false);
+  let newMessagesCount = $state(0);
   let isResumingScroll = false;
   let firstNewMessageIndex: number | null = null;
   let isAutoScrolling = false;
   let lastScrollTop = 0;
+  let db: Database;
 
-  /**
-   * Rola a janela de chat para o fundo.
-   */
   async function scrollToBottom(behavior: "smooth" | "auto" = "auto") {
     isAutoScrolling = true;
     await tick();
@@ -55,14 +60,23 @@
     }
     setTimeout(() => {
       isAutoScrolling = false;
-    }, 100);
+    }, 150);
   }
 
-  /**
-   * Lógica executada quando o componente é montado no DOM.
-   */
+  let firstTime: boolean = true;
+  $effect(() => {
+    if (active && chatWindowElement && firstTime) {
+      scrollToBottom();
+      firstTime = false;
+    }
+  });
+
   onMount(() => {
-    scrollToBottom();
+    const setupDatabase = async () => {
+      db = await Database.load("sqlite:mydatabase.db");
+      messages = await fillMessagesFromDb();
+    };
+    setupDatabase();
 
     const throttledHandleScroll = throttle(handleScroll, 100);
     chatWindowElement.addEventListener("scroll", throttledHandleScroll);
@@ -71,14 +85,18 @@
       unlisten = await listen<ChatMessage>("new-chat-message", (event) => {
         if (event.payload.chatroomId.toString() === channelId) {
           const isAtBottomBeforeUpdate = !userHasScrolledUp;
-          messages = [...messages, event.payload];
+          if (messages.length >= 500) {
+            messages.shift();
+          }
+          messages.push(event.payload);
+
           if (userHasScrolledUp) {
             if (firstNewMessageIndex === null) {
               firstNewMessageIndex = messages.length - 1;
             }
             newMessagesCount++;
           } else if (isAtBottomBeforeUpdate) {
-            scrollToBottom();
+            scrollToBottom("auto");
           }
         }
       });
@@ -91,9 +109,6 @@
     };
   });
 
-  /**
-   * Função executada no evento de scroll para controlar a lógica do contador.
-   */
   function handleScroll() {
     if (isAutoScrolling || isResumingScroll || !chatWindowElement) return;
 
@@ -101,7 +116,7 @@
     const scrollHeight = chatWindowElement.scrollHeight;
     const clientHeight = chatWindowElement.clientHeight;
 
-    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 35;
+    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 100;
 
     if (isAtBottom) {
       userHasScrolledUp = false;
@@ -135,9 +150,6 @@
     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
   }
 
-  /**
-   * Chamado ao clicar no botão "Voltar para o final / Novas Mensagens".
-   */
   function resumeAutoScroll() {
     isResumingScroll = true;
     userHasScrolledUp = false;
@@ -149,7 +161,6 @@
     }, 500);
   }
 
-  // --- Funções de Utilidade ---
   function throttle<T extends (...args: any[]) => any>(
     func: T,
     limit: number
@@ -163,6 +174,7 @@
       }
     } as T;
   }
+
   function parseEmotes(content: string): string {
     const emoteRegex = /\[emote:(\d+):(\w+)\]/g;
     return content.replace(emoteRegex, (match, emoteId, emoteName) => {
@@ -170,6 +182,7 @@
       return `<img src="${emoteUrl}" alt="${emoteName}" class="emote" title="${emoteName}" style="max-height: 1.6em; vertical-align: middle;" />`;
     });
   }
+
   function formatTimestamp(isoString: string): string {
     try {
       const date = new Date(isoString);
@@ -180,11 +193,43 @@
       return "00:00";
     }
   }
+
+  async function fillMessagesFromDb(): Promise<ChatMessage[]> {
+    if (!db) return [];
+    const rows: Array<any> = await db.select(
+      `SELECT 
+       messages.id, messages.chatroom_id, messages.content, messages.created_at,
+       senders.id AS sender_id, senders.username, senders.slug, senders.color
+        FROM messages
+        INNER JOIN senders ON messages.sender_id = senders.id
+        WHERE messages.chatroom_id = ?
+        ORDER BY datetime(messages.created_at) ASC
+        LIMIT 500
+        `,
+      [channelId]
+    );
+    return rows.map((row) => ({
+      id: row.id,
+      chatroomId: row.chatroom_id,
+      content: row.content,
+      messageType: "message",
+      createdAt: row.created_at,
+      sender: {
+        id: row.sender_id,
+        username: row.username,
+        slug: row.slug,
+        identity: {
+          color: row.color,
+          badges: [],
+        },
+      },
+    }));
+  }
 </script>
 
 <div class="chat-container">
   <div bind:this={chatWindowElement} class="chat-window">
-    {#if messages.length === 0}
+    {#if messages.length === 0 && active}
       <p class="status">Aguardando mensagens para o canal {channelId}...</p>
     {:else}
       {#each messages as msg, i (msg.id)}
@@ -247,6 +292,20 @@
     width: 100%;
     min-height: 0;
     overflow-y: scroll;
+  }
+
+  .chat-window::-webkit-scrollbar {
+    width: 10px;
+  }
+  .chat-window::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .chat-window::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+  }
+  .chat-window::-webkit-scrollbar-thumb:hover {
+    background: #777;
   }
 
   .scroll-button-container {
