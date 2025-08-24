@@ -15,6 +15,7 @@
   "dependencies": {
     "@tauri-apps/api": "2.8.0",
     "@tauri-apps/plugin-opener": "2.5.0",
+    "@tauri-apps/plugin-sql": "^2.3.0",
     "@tauri-apps/plugin-store": "^2.4.0",
     "sortablejs": "^1.15.6"
   },
