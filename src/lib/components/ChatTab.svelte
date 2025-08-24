@@ -1,7 +1,7 @@
 <script lang="ts">
   import { listen, type UnlistenFn } from "@tauri-apps/api/event";
   import { onMount, tick } from "svelte";
-  import Database from "@tauri-apps/plugin-sql";
+  import { invoke } from "@tauri-apps/api/core";
 
   // --- Interfaces ---
   interface Identity {
@@ -32,7 +32,6 @@
   // --- Estado do Componente ---
   let messages = $state<ChatMessage[]>([]);
   let unlisten: UnlistenFn;
-  let db: Database;
   let chatWindowElement: HTMLDivElement;
 
   let userHasScrolledUp = $state(false);
@@ -72,8 +71,9 @@
 
   onMount(() => {
     const setupDatabase = async () => {
-      db = await Database.load("sqlite:mydatabase.db");
-      messages = await fillMessagesFromDb();
+      messages = await invoke("get_chat_history", {
+        chatroomId: channelId,
+      });
     };
     setupDatabase();
 
@@ -98,7 +98,6 @@
       });
     };
     setupListener();
-
     return () => {
       if (unlisten) unlisten();
       chatWindowElement.removeEventListener("scroll", throttledHandleScroll);
@@ -215,37 +214,6 @@
     } catch (e) {
       return "00:00";
     }
-  }
-
-  async function fillMessagesFromDb(): Promise<ChatMessage[]> {
-    if (!db) return [];
-    const rows: Array<any> = await db.select(
-      `SELECT 
-       messages.id, messages.chatroom_id, messages.content, messages.created_at,
-       senders.id AS sender_id, senders.username, senders.slug, senders.color
-     FROM messages
-     INNER JOIN senders ON messages.sender_id = senders.id
-     WHERE messages.chatroom_id = ?
-     ORDER BY datetime(messages.created_at) ASC
-     LIMIT 500`,
-      [channelId]
-    );
-    return rows.map((row) => ({
-      id: row.id,
-      chatroomId: row.chatroom_id,
-      content: row.content,
-      messageType: "message",
-      createdAt: row.created_at,
-      sender: {
-        id: row.sender_id,
-        username: row.username,
-        slug: row.slug,
-        identity: {
-          color: row.color,
-          badges: [],
-        },
-      },
-    }));
   }
 </script>
 
