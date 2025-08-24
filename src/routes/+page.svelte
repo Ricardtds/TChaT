@@ -4,6 +4,7 @@
   import { load, type Store } from "@tauri-apps/plugin-store";
   import ChatTab from "$lib/components/ChatTab.svelte";
 
+  // --- Estado do Componente (Usando Svelte 5 Runes) ---
   let store: Store;
   let newChannelName: string = $state("");
   let newChatroomId: string = $state("");
@@ -12,22 +13,14 @@
   let tabs: Tab[] = $state([]);
   let activeTabId: string | null = $state(null);
 
-  // --- Scroll horizontal das tab pelo mouse ---
+  let showPopup: boolean = $state(false);
   let tabsContainer: HTMLUListElement | null = null;
-
-  function handleWheel(event: WheelEvent) {
-    if (!tabsContainer) return;
-    event.preventDefault();
-    tabsContainer.scrollLeft += event.deltaY;
-  }
 
   // --- Estado para o Drag and Drop Nativo ---
   let draggedItemId: string | null = $state(null);
   let dragOverItemId: string | null = $state(null);
 
-  // --- Popup para adicionar novo chat ---
-  let showPopup: boolean = $state(false);
-
+  // --- Funções da Interface ---
   function openPopup() {
     showPopup = true;
   }
@@ -36,22 +29,34 @@
     showPopup = false;
   }
 
+  function handleWheel(event: WheelEvent) {
+    if (!tabsContainer) return;
+    event.preventDefault();
+    tabsContainer.scrollLeft += event.deltaY;
+  }
+
   // --- Funções para o Drag and Drop Nativo ---
 
   function handleDragStart(event: DragEvent, tabId: string) {
     draggedItemId = tabId;
+    // É necessário definir algum dado para o arraste funcionar no Firefox
     event.dataTransfer!.setData("text/plain", tabId);
     event.dataTransfer!.effectAllowed = "move";
   }
 
   function handleDragOver(event: DragEvent, tabId: string) {
+    // Prevenir o comportamento padrão é CRUCIAL para permitir que o evento 'drop' funcione.
     event.preventDefault();
     if (tabId !== draggedItemId) {
       dragOverItemId = tabId;
     }
   }
 
-  async function handleDrop(event: DragEvent, droppedOnTabId: string) {
+  function handleDragLeave() {
+    dragOverItemId = null;
+  }
+
+  function handleDrop(event: DragEvent, droppedOnTabId: string) {
     event.preventDefault();
     if (!draggedItemId || draggedItemId === droppedOnTabId) {
       return;
@@ -62,21 +67,28 @@
 
     if (draggedIndex === -1 || targetIndex === -1) return;
 
+    // Lógica para reordenar o array
     const newTabsOrder = [...tabs];
     const [draggedItem] = newTabsOrder.splice(draggedIndex, 1);
     newTabsOrder.splice(targetIndex, 0, draggedItem);
 
+    // Atualiza o estado do Svelte. O Svelte cuidará do DOM.
+    // O $effect cuidará de salvar o novo estado.
     tabs = newTabsOrder;
-    // Salva o estado explicitamente após reordenar
-    await saveTabsState();
   }
 
   function handleDragEnd() {
+    // Limpa o estado ao final do arraste para remover os estilos visuais
     draggedItemId = null;
     dragOverItemId = null;
   }
 
-  // --- LÓGICA DE SALVAMENTO CORRIGIDA ---
+  // Efeito reativo para salvar o estado sempre que as abas mudarem.
+  $effect(() => {
+    if (store) {
+      saveTabsState();
+    }
+  });
 
   async function saveTabsState() {
     if (!store) return;
@@ -99,24 +111,21 @@
       const newTab: Tab = { id: newChatroomId, title: newChannelName };
       tabs.push(newTab);
       activeTabId = newChatroomId;
-
-      // MUDANÇA: Agora esperamos o salvamento terminar antes de continuar
-      await saveTabsState();
-
-      // Só limpa os inputs depois que tudo foi salvo com sucesso
-      newChatroomId = "";
       newChannelName = "";
+      newChatroomId = "";
+      saveTabsState();
     } catch (e) {
-      console.error(`Erro ao conectar no chatroom ${newChatroomId}: ${e}`);
+      console.error(`Erro ao se inscrever no chatroom ${newChatroomId}: ${e}`);
     }
   }
 
   async function closeTab(tabIdToClose: string) {
     try {
       await invoke("unsubscribe_from_channel", { chatroomId: tabIdToClose });
+      saveTabsState();
     } catch (e) {
       console.error(
-        `Erro ao tentar desconectar do chatroom ${tabIdToClose}:`,
+        `Erro ao cancelar a inscrição do chatroom ${tabIdToClose}:`,
         e
       );
     }
@@ -125,10 +134,8 @@
       tabs.splice(indexToRemove, 1);
     }
     if (activeTabId === tabIdToClose) {
-      activeTabId = tabs.length > 0 ? tabs[0].id : null;
+      activeTabId = tabs.at(0)?.id ?? null;
     }
-    // Salva o estado explicitamente após fechar
-    await saveTabsState();
   }
 
   onMount(async () => {
@@ -140,7 +147,7 @@
       invoke("subscribe_to_channel", { chatroomId: tab.id })
         .then(() => ({ ...tab, status: "success" as const }))
         .catch((e) => {
-          console.error(`Falha ao reconectar ao chatroom ${tab.id}:`, e);
+          console.error(`Falha ao se reinscrever no chatroom ${tab.id}:`, e);
           return { ...tab, status: "failure" as const };
         })
     );
@@ -150,7 +157,7 @@
         acc.push({ id: result.id, title: result.title });
       return acc;
     }, []);
-    if (tabs.length > 0) activeTabId = tabs[0].id;
+    if (tabs.length > 0) activeTabId = tabs.at(0)?.id ?? null;
   });
 </script>
 
@@ -166,7 +173,7 @@
             class:drag-over={dragOverItemId === tab.id}
             ondragstart={(e) => handleDragStart(e, tab.id)}
             ondragover={(e) => handleDragOver(e, tab.id)}
-            ondragleave={() => (dragOverItemId = null)}
+            ondragleave={handleDragLeave}
             ondrop={(e) => handleDrop(e, tab.id)}
             ondragend={handleDragEnd}
           >
@@ -175,7 +182,7 @@
             </button>
             <button
               class="tab-close"
-              onclick={(event: MouseEvent) => {
+              onclick={(event) => {
                 event.stopPropagation();
                 closeTab(tab.id);
               }}
@@ -191,7 +198,7 @@
             aria-label="Adicionar nova aba de chat"
           >
             <svg
-              class="w-6 h-6 text-gray-800 dark:text-white"
+              class="w-6 h-6"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -204,7 +211,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M9 5v14m8-7h-2m0 0h-2m2 0v2m0-2v-2M3 11h6m-6 4h6m11 4H4c-.55228 0-1-.4477-1-1V6c0-.55228.44772-1 1-1h16c.5523 0 1 .44772 1 1v12c0 .5523-.4477 1-1 1Z"
+                d="M12 5v14m-7-7h14"
               />
             </svg>
           </button>
@@ -212,22 +219,20 @@
       </ul>
     </nav>
   </header>
+
   {#if showPopup}
     <div
       class="popup-backdrop"
       role="button"
       tabindex="0"
       onclick={closePopup}
-      onkeydown={(e) => (e.key === "Enter" || e.key === " ") && closePopup()}
+      onkeydown={(e) => e.key === "Escape" && closePopup()}
     >
       <div
         class="popup"
         role="dialog"
         tabindex="0"
         onclick={(e) => e.stopPropagation()}
-        onkeydown={(e) => {
-          if (e.key === "Escape") closePopup();
-        }}
       >
         <div class="connect-form">
           <input bind:value={newChannelName} placeholder="Nome do Canal" />
@@ -261,6 +266,7 @@
   :global(*, *:before, *:after) {
     box-sizing: inherit;
   }
+
   .popup-backdrop {
     position: fixed;
     inset: 0;
@@ -275,18 +281,16 @@
     background: #1f2937;
     padding: 1.5rem;
     border-radius: 8px;
-    min-width: 300px;
+    border: 1px solid #374151;
+    min-width: 400px;
     max-width: 90%;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 
-  .popup button {
-    margin-top: 1rem;
-  }
   .container {
     display: flex;
     flex-direction: column;
-    padding: 0rem;
+    padding: 0;
     margin: 0 auto;
     width: 100%;
     height: 100vh;
@@ -294,30 +298,28 @@
   .tabs-content {
     flex-grow: 1;
     min-height: 0;
-    border: 1px solid #374151;
-    border-top: none;
     display: flex;
+    padding: 0 1rem 1rem 1rem;
   }
-  .header,
-  .connect-form {
-    padding: 0 1rem;
+  .header {
     flex-shrink: 0;
+    padding: 1rem 1rem 0 1rem;
+    border-bottom: 1px solid #374151;
   }
+
   .connect-form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
   }
-  .connect-form > * {
-    flex: 1 1 200px;
-  }
+
   .connect-form input {
     padding: 0.75rem;
-    background-color: #1f2937;
+    background-color: #111827;
     border: 1px solid #374151;
     color: #e5e7eb;
     border-radius: 6px;
+    font-size: 1rem;
   }
   .connect-form button {
     padding: 0.75rem 1.5rem;
@@ -339,11 +341,7 @@
   .tab-pane.active {
     display: flex;
   }
-  header {
-    background-color: transparent;
-    border-bottom: 1px solid #374151;
-    padding: 0;
-  }
+
   nav ul {
     display: flex;
     list-style: none;
@@ -351,41 +349,35 @@
     padding: 0;
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
   }
 
-  /* barra de scroll */
   nav ul::-webkit-scrollbar {
-    width: 10px; /* largura */
+    height: 6px;
   }
-
-  /* trilho (background da barra) */
   nav ul::-webkit-scrollbar-track {
     background: transparent;
-    border-radius: 5px;
   }
-
-  /* polegar (parte que se move) */
   nav ul::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
+    background: #374151;
+    border-radius: 3px;
+  }
+  nav ul::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
   }
 
-  /* hover no polegar */
-  nav ul::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
   li {
     display: flex;
     align-items: center;
     border: 1px solid transparent;
     border-bottom: none;
     position: relative;
+    top: 1px;
     background-color: #1f2937;
     border-radius: 6px 6px 0 0;
     margin-right: 4px;
-    flex-shrink: 0;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
   }
 
   /* Estilos para o feedback visual do Drag and Drop Nativo */
@@ -412,10 +404,9 @@
   li.active {
     background-color: #111827;
     border-color: #374151;
-    border-bottom-color: #111827;
+    border-bottom-color: transparent;
   }
-  li.active button.tab-title,
-  button.tab-add {
+  li.active button.tab-title {
     color: #60a5fa;
     font-weight: 500;
   }
@@ -427,21 +418,33 @@
     color: #9ca3af;
     transition: color 0.2s ease-in-out;
   }
-  .tab-title,
-  .tab-add {
-    padding: 0.1rem 0.1rem;
+  .tab-title {
+    padding: 0.75rem 1rem;
     white-space: nowrap;
   }
-  .tab-title:hover,
-  .tab-add {
+  .tab-title:hover {
     color: #e5e7eb;
   }
   .tab-close {
     padding: 0 0.5rem;
     font-size: 1.2rem;
     color: #6b7280;
+    border-radius: 99px;
   }
   .tab-close:hover {
+    color: #e5e7eb;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .tab-add {
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+  .tab-add svg {
+    width: 1.2em;
+    height: 1.2em;
+  }
+  .tab-add:hover {
     color: #e5e7eb;
   }
 </style>
