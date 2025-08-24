@@ -1,10 +1,13 @@
-use std::collections::HashMap;
-use std::sync::Mutex;
-use tauri::{AppHandle, Emitter, State, Manager};
-use tokio_util::sync::CancellationToken;
+use std::sync::Arc;
 
-use futures_util::{SinkExt, StreamExt};
-use tokio_tungstenite::{connect_async, tungstenite::protocol::Message};
+use futures_util::{stream::SplitSink, SinkExt, StreamExt};
+use sqlx::{sqlite::SqlitePool, Pool};
+use tauri::{AppHandle, Emitter, Manager, State, Window};
+use tokio::net::TcpStream;
+use tokio::sync::Mutex;
+use tokio_tungstenite::{
+    connect_async, tungstenite::protocol::Message, MaybeTlsStream, WebSocketStream,
+};
 
 use crate::models::api::{ApiChatMessage, ApiOuterMessage};
 use crate::models::app::AppChatMessage;
@@ -19,93 +22,163 @@ struct PusherEvent {
     data: SubscriptionData,
 }
 
-// O tipo para nosso gerenciador de estado
-pub type ConnectionManager = Mutex<HashMap<String, CancellationToken>>;
+pub type WsWriter = SplitSink<WebSocketStream<MaybeTlsStream<TcpStream>>, Message>;
+pub struct WsState(pub Arc<Mutex<Option<WsWriter>>>);
 
 #[tauri::command]
-pub async fn connect_chat(
-    // MUDANÇA: Agora recebemos o ID da sala de chat diretamente do front-end
+pub async fn subscribe_to_channel(
     chatroom_id: String,
     app: AppHandle,
-    manager: State<'_, ConnectionManager>,
-) -> Result<(), String> { // MUDANÇA: Não retorna mais o histórico de mensagens
+    window: Window,
+    ws_state: State<'_, WsState>,
+    db_pool: State<'_, SqlitePool>,
+) -> Result<(), String> {
+    let mut writer_lock = ws_state.0.lock().await;
+    let db_pool = db_pool.inner().clone();
 
-    // --- LÓGICA DE CONEXÃO EM TEMPO REAL ---
-    let ws_url = "wss://ws-us2.pusher.com/app/32cbd69e4b950bf97679?protocol=7".to_string();
-    println!("[RUST]: Conectando ao WebSocket para o chatroom {}", &chatroom_id);
+    if writer_lock.is_none() {
+        println!("[RUST]: Nenhuma conexão ativa. Estabelecendo conexão WebSocket...");
+        let ws_url = "wss://ws-us2.pusher.com/app/32cbd69e4b950bf97679?protocol=7".to_string();
+        let (ws_stream, _) = connect_async(&ws_url).await.map_err(|e| e.to_string())?;
+        println!("[RUST]: Conexão WebSocket estabelecida.");
 
-    let (ws_stream, _) = connect_async(&ws_url).await.map_err(|e| e.to_string())?;
-    let (mut write, mut read) = ws_stream.split();
-    
-    let token = CancellationToken::new();
-    manager.lock().unwrap().insert(chatroom_id.clone(), token.clone());
-    
-    let subscribe_message = PusherEvent { 
-        event: "pusher:subscribe".to_string(),
-        data: SubscriptionData {
-            channel: format!("chatrooms.{}.v2", chatroom_id),
-        },
-    };
-    let json_message = serde_json::to_string(&subscribe_message).map_err(|e| e.to_string())?;
-    write.send(Message::Text(json_message.into())).await.map_err(|e| e.to_string())?;
-    
-    let chatroom_id_clone_for_task = chatroom_id.clone();
-    tokio::spawn(async move {
-        loop {
-            tokio::select! {
-                _ = token.cancelled() => {
-                    println!("[RUST]: Conexão para o chatroom {} cancelada.", &chatroom_id_clone_for_task);
-                    break;
-                }
-                Some(message) = read.next() => {
-                    match message {
-                        Ok(msg) => { if handle_message(msg, &app).is_err() { break; } }
-                        Err(e) => {
-                            eprintln!("❌ Erro ao receber mensagem do chatroom {}: {}", &chatroom_id_clone_for_task, e);
+        let (write, read) = ws_stream.split();
+
+        // Salva a parte "escritora" no estado global.
+        *writer_lock = Some(write);
+
+        let task_db_pool = db_pool.clone();
+        let app_clone = app.clone();
+        tokio::spawn(async move {
+            println!("[RUST]: Tarefa leitora de WebSocket iniciada.");
+            let mut read_stream = read;
+            while let Some(message_result) = read_stream.next().await {
+                match message_result {
+                    Ok(msg) => {
+                        if handle_message(&task_db_pool, msg, &window).await.is_err() {
+                            println!("[RUST]: Conexão fechada. Encerrando tarefa leitora.");
                             break;
                         }
                     }
+                    Err(e) => {
+                        eprintln!("❌ Erro ao receber mensagem WebSocket: {}", e);
+                        break;
+                    }
                 }
             }
-        }
-        let manager = app.state::<ConnectionManager>();
-        manager.lock().unwrap().remove(&chatroom_id_clone_for_task);
-        println!("[RUST]: Tarefa para o chatroom {} finalizada e limpa.", &chatroom_id_clone_for_task);
-    });
-    
+            let ws_state = app_clone.state::<WsState>();
+            *ws_state.0.lock().await = None;
+            println!("[RUST]: Tarefa leitora de WebSocket finalizada.");
+        });
+    }
+
+    if let Some(writer) = writer_lock.as_mut() {
+        let subscribe_message = PusherEvent {
+            event: "pusher:subscribe".to_string(),
+            data: SubscriptionData {
+                channel: format!("chatrooms.{}.v2", chatroom_id),
+            },
+        };
+        let json_message = serde_json::to_string(&subscribe_message).map_err(|e| e.to_string())?;
+        writer
+            .send(Message::Text(json_message.into()))
+            .await
+            .map_err(|e| e.to_string())?;
+        println!("[RUST]: Inscrito no canal {}", &chatroom_id);
+
+        let _ = cleanup_messages(&db_pool, &chatroom_id, 2000).await;
+    } else {
+        return Err("Não foi possível obter o escritor da conexão WebSocket.".into());
+    }
+
     Ok(())
 }
 
-// Função auxiliar para processar cada mensagem recebida do WebSocket
-fn handle_message(msg: Message, app: &AppHandle) -> Result<(), ()> {
+#[tauri::command]
+pub async fn unsubscribe_from_channel(
+    chatroom_id: String,
+    ws_state: State<'_, WsState>,
+    db_pool: State<'_, SqlitePool>,
+) -> Result<(), String> {
+    let mut writer_lock = ws_state.0.lock().await;
+    if let Some(writer) = writer_lock.as_mut() {
+        let unsubscribe_message = PusherEvent {
+            event: "pusher:unsubscribe".to_string(),
+            data: SubscriptionData {
+                channel: format!("chatrooms.{}.v2", chatroom_id),
+            },
+        };
+        let json_message = serde_json::to_string(&unsubscribe_message).map_err(|e| e.to_string())?;
+        writer
+            .send(Message::Text(json_message.into()))
+            .await
+            .map_err(|e| e.to_string())?;
+        println!("[RUST]: Inscrição cancelada para o canal {}", &chatroom_id);
+        let _ = cleanup_messages(&db_pool, &chatroom_id, 0).await;
+        Ok(())
+    } else {
+        Err("Não há conexão ativa para cancelar a inscrição.".into())
+    }
+}
+
+
+async fn handle_message(pool: &Pool<sqlx::Sqlite>, msg: Message, window: &Window) -> Result<(), ()> {
     if let Message::Text(text) = msg {
         if let Ok(outer_message) = serde_json::from_str::<ApiOuterMessage>(&text) {
             if outer_message.event == "App\\Events\\ChatMessageEvent" {
                 if let Ok(api_message) = serde_json::from_str::<ApiChatMessage>(&outer_message.data) {
+                    let _ = insert_message(pool, &api_message).await;
                     println!("💬 Recebido de [{}]: {}", api_message.sender.username, api_message.content);
                     let app_message: AppChatMessage = api_message.into();
-                    app.emit("new-chat-message", app_message).unwrap();
+                    window.emit("new-chat-message", app_message).unwrap();
                 }
             }
         }
     } else if let Message::Close(_) = msg {
-        println!("🔌 Conexão fechada pelo servidor.");
         return Err(());
     }
     Ok(())
 }
 
-// Comando para encerrar uma conexão de chat específica
-#[tauri::command]
-pub async fn disconnect_chat(
-    chatroom_id: String,
-    manager: State<'_, ConnectionManager>,
-) -> Result<(), String> {
-    println!("[RUST]: Solicitando desconexão do chatroom {}", &chatroom_id);
-    if let Some(token) = manager.lock().unwrap().get(&chatroom_id) {
-        token.cancel();
-        Ok(())
-    } else {
-        Err(format!("[RUST]: Não foi possível encontrar conexão para o chatroom {}", &chatroom_id))
+async fn insert_message(pool: &Pool<sqlx::Sqlite>, api_message: &ApiChatMessage) -> Result<(), sqlx::Error> {
+    sqlx::query("INSERT OR IGNORE INTO senders(id, username, slug, color) VALUES (?, ?, ?, ?)")
+        .bind(api_message.sender.id as i64)
+        .bind(&api_message.sender.username)
+        .bind(&api_message.sender.slug)
+        .bind(&api_message.sender.identity.color)
+        .execute(pool).await?;
+    
+    sqlx::query("INSERT OR IGNORE INTO messages(id, chatroom_id, content, created_at, sender_id) VALUES (?, ?, ?, ?, ?)")
+        .bind(&api_message.id)
+        .bind(api_message.chatroom_id as i64)
+        .bind(&api_message.content)
+        .bind(&api_message.created_at)
+        .bind(api_message.sender.id as i64)
+        .execute(pool).await?;
+    
+    Ok(())
+}
+
+pub async fn cleanup_messages(pool: &Pool<sqlx::Sqlite>, chatroom_id: &String, keep_rows: i64) -> Result<(), sqlx::Error> {
+    let total: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM messages WHERE chatroom_id = ?")
+        .bind(chatroom_id)
+        .fetch_one(pool)
+        .await
+        .unwrap_or(0);
+
+    if total > keep_rows {
+        let offset = total - keep_rows;
+        let result = sqlx::query(
+            "DELETE FROM messages WHERE id IN (SELECT id FROM messages WHERE chatroom_id = ? ORDER BY created_at ASC LIMIT ?)"
+        )
+        .bind(chatroom_id)
+        .bind(offset)
+        .execute(pool)
+        .await;
+
+        if let Ok(res) = result {
+             println!("Limpeza de mensagens antigas para o chat {}: {} linhas deletadas.", chatroom_id, res.rows_affected());
+        }
     }
+    Ok(())
 }
