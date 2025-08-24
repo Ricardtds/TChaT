@@ -12,9 +12,29 @@
   let tabs: Tab[] = $state([]);
   let activeTabId: string | null = $state(null);
 
+  // --- Scroll horizontal das tab pelo mouse ---
+  let tabsContainer: HTMLUListElement | null = null;
+
+  function handleWheel(event: WheelEvent) {
+    if (!tabsContainer) return;
+    event.preventDefault();
+    tabsContainer.scrollLeft += event.deltaY;
+  }
+
   // --- Estado para o Drag and Drop Nativo ---
   let draggedItemId: string | null = $state(null);
   let dragOverItemId: string | null = $state(null);
+
+  // --- Popup para adicionar novo chat ---
+  let showPopup: boolean = $state(false);
+
+  function openPopup() {
+    showPopup = true;
+  }
+
+  function closePopup() {
+    showPopup = false;
+  }
 
   // --- Funções para o Drag and Drop Nativo ---
 
@@ -73,8 +93,9 @@
     ) {
       return;
     }
+    closePopup();
     try {
-      await invoke("connect_chat", { chatroomId: newChatroomId });
+      await invoke("subscribe_to_channel", { chatroomId: newChatroomId });
       const newTab: Tab = { id: newChatroomId, title: newChannelName };
       tabs.push(newTab);
       activeTabId = newChatroomId;
@@ -92,7 +113,7 @@
 
   async function closeTab(tabIdToClose: string) {
     try {
-      await invoke("disconnect_chat", { chatroomId: tabIdToClose });
+      await invoke("unsubscribe_from_channel", { chatroomId: tabIdToClose });
     } catch (e) {
       console.error(
         `Erro ao tentar desconectar do chatroom ${tabIdToClose}:`,
@@ -116,7 +137,7 @@
     if (!savedTabs || savedTabs.length === 0) return;
 
     const connectionPromises = savedTabs.map((tab) =>
-      invoke("connect_chat", { chatroomId: tab.id })
+      invoke("subscribe_to_channel", { chatroomId: tab.id })
         .then(() => ({ ...tab, status: "success" as const }))
         .catch((e) => {
           console.error(`Falha ao reconectar ao chatroom ${tab.id}:`, e);
@@ -134,19 +155,9 @@
 </script>
 
 <main class="container">
-  <div class="connect-form">
-    <input bind:value={newChannelName} placeholder="Nome do Canal" />
-    <input
-      bind:value={newChatroomId}
-      placeholder="ID da Sala de Chat"
-      onkeydown={(e) => e.key === "Enter" && addChatTab()}
-    />
-    <button onclick={addChatTab}>Conectar</button>
-  </div>
-
   <header class="header">
     <nav>
-      <ul>
+      <ul bind:this={tabsContainer} onwheel={handleWheel}>
         {#each tabs as tab (tab.id)}
           <li
             draggable="true"
@@ -164,7 +175,7 @@
             </button>
             <button
               class="tab-close"
-              onclick={(event) => {
+              onclick={(event: MouseEvent) => {
                 event.stopPropagation();
                 closeTab(tab.id);
               }}
@@ -173,14 +184,68 @@
             </button>
           </li>
         {/each}
+        <li>
+          <button
+            class="tab-add"
+            onclick={openPopup}
+            aria-label="Adicionar nova aba de chat"
+          >
+            <svg
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5v14m8-7h-2m0 0h-2m2 0v2m0-2v-2M3 11h6m-6 4h6m11 4H4c-.55228 0-1-.4477-1-1V6c0-.55228.44772-1 1-1h16c.5523 0 1 .44772 1 1v12c0 .5523-.4477 1-1 1Z"
+              />
+            </svg>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
+  {#if showPopup}
+    <div
+      class="popup-backdrop"
+      role="button"
+      tabindex="0"
+      onclick={closePopup}
+      onkeydown={(e) => (e.key === "Enter" || e.key === " ") && closePopup()}
+    >
+      <div
+        class="popup"
+        role="dialog"
+        tabindex="0"
+        onclick={(e) => e.stopPropagation()}
+        onkeydown={(e) => {
+          if (e.key === "Escape") closePopup();
+        }}
+      >
+        <div class="connect-form">
+          <input bind:value={newChannelName} placeholder="Nome do Canal" />
+          <input
+            bind:value={newChatroomId}
+            placeholder="ID da Sala de Chat"
+            onkeydown={(e) => e.key === "Enter" && addChatTab()}
+          />
+          <button onclick={addChatTab}>Conectar</button>
+        </div>
+      </div>
+    </div>
+  {/if}
 
   <div class="tabs-content">
     {#each tabs as tab (tab.id)}
       <div class="tab-pane" class:active={activeTabId === tab.id}>
-        <ChatTab channelId={tab.id} />
+        <ChatTab channelId={tab.id} active={activeTabId === tab.id} />
       </div>
     {/each}
   </div>
@@ -196,11 +261,32 @@
   :global(*, *:before, *:after) {
     box-sizing: inherit;
   }
+  .popup-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .popup {
+    background: #1f2937;
+    padding: 1.5rem;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .popup button {
+    margin-top: 1rem;
+  }
   .container {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    max-width: 900px;
+    padding: 0rem;
     margin: 0 auto;
     width: 100%;
     height: 100vh;
@@ -214,13 +300,14 @@
   }
   .header,
   .connect-form {
+    padding: 0 1rem;
     flex-shrink: 0;
   }
   .connect-form {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
   }
   .connect-form > * {
     flex: 1 1 200px;
@@ -266,6 +353,28 @@
     overflow-x: auto;
     padding-bottom: 4px;
   }
+
+  /* barra de scroll */
+  nav ul::-webkit-scrollbar {
+    width: 10px; /* largura */
+  }
+
+  /* trilho (background da barra) */
+  nav ul::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  /* polegar (parte que se move) */
+  nav ul::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+
+  /* hover no polegar */
+  nav ul::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   li {
     display: flex;
     align-items: center;
@@ -305,7 +414,8 @@
     border-color: #374151;
     border-bottom-color: #111827;
   }
-  li.active button.tab-title {
+  li.active button.tab-title,
+  button.tab-add {
     color: #60a5fa;
     font-weight: 500;
   }
@@ -317,11 +427,13 @@
     color: #9ca3af;
     transition: color 0.2s ease-in-out;
   }
-  .tab-title {
-    padding: 0.75rem 1rem;
+  .tab-title,
+  .tab-add {
+    padding: 0.1rem 0.1rem;
     white-space: nowrap;
   }
-  .tab-title:hover {
+  .tab-title:hover,
+  .tab-add {
     color: #e5e7eb;
   }
   .tab-close {
