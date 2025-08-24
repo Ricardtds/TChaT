@@ -24,39 +24,38 @@
   }
 
   // --- Props (Svelte 5) ---
-  const {
-    channelId,
-    active,
-    initialMessages = [],
-  } = $props<{
+  const { channelId, active } = $props<{
     channelId: string;
     active: boolean;
-    initialMessages?: ChatMessage[];
   }>();
 
   // --- Estado do Componente ---
-  let messages = $state<ChatMessage[]>(initialMessages);
+  let messages = $state<ChatMessage[]>([]);
   let unlisten: UnlistenFn;
+  let db: Database;
   let chatWindowElement: HTMLDivElement;
-  let messageElements: HTMLElement[] = [];
 
   let userHasScrolledUp = $state(false);
   let newMessagesCount = $state(0);
   let isResumingScroll = false;
-  let firstNewMessageIndex: number | null = null;
   let isAutoScrolling = false;
   let lastScrollTop = 0;
-  let db: Database;
 
+  // --- Estado para a lógica de contagem regressiva ---
+  let messageElements: HTMLElement[] = [];
+  let pendingMessages: ChatMessage[] = $state([]);
+
+  /**
+   * Rola a janela de chat para o fundo.
+   */
   async function scrollToBottom(behavior: "smooth" | "auto" = "auto") {
     isAutoScrolling = true;
     await tick();
     if (chatWindowElement) {
-      chatWindowElement.scroll({
+      chatWindowElement.scrollTo({
         top: chatWindowElement.scrollHeight,
         behavior,
       });
-      lastScrollTop = chatWindowElement.scrollTop;
     }
     setTimeout(() => {
       isAutoScrolling = false;
@@ -85,17 +84,14 @@
       unlisten = await listen<ChatMessage>("new-chat-message", (event) => {
         if (event.payload.chatroomId.toString() === channelId) {
           const isAtBottomBeforeUpdate = !userHasScrolledUp;
-          if (messages.length >= 500) {
-            messages.shift();
-          }
-          messages.push(event.payload);
-
           if (userHasScrolledUp) {
-            if (firstNewMessageIndex === null) {
-              firstNewMessageIndex = messages.length - 1;
-            }
-            newMessagesCount++;
+            pendingMessages.push(event.payload);
+            newMessagesCount = pendingMessages.length;
           } else if (isAtBottomBeforeUpdate) {
+            if (messages.length >= 500) {
+              messages.shift();
+            }
+            messages.push(event.payload);
             scrollToBottom("auto");
           }
         }
@@ -109,58 +105,85 @@
     };
   });
 
+  /**
+   * Função executada no evento de scroll para controlar o estado.
+   */
   function handleScroll() {
     if (isAutoScrolling || isResumingScroll || !chatWindowElement) return;
 
     const currentScrollTop = chatWindowElement.scrollTop;
     const scrollHeight = chatWindowElement.scrollHeight;
     const clientHeight = chatWindowElement.clientHeight;
-
     const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 100;
 
     if (isAtBottom) {
       userHasScrolledUp = false;
       newMessagesCount = 0;
-      firstNewMessageIndex = null;
+      if (pendingMessages.length > 0) {
+        messages = [...messages, ...pendingMessages];
+        pendingMessages = [];
+        while (messages.length > 500) {
+          messages.shift();
+        }
+      }
     } else {
       if (currentScrollTop < lastScrollTop) {
         userHasScrolledUp = true;
       }
-      if (firstNewMessageIndex === null) return;
+      if (userHasScrolledUp && pendingMessages.length > 0) {
+        const chatWindowRect = chatWindowElement.getBoundingClientRect();
+        let lastVisibleMessageIndex = -1;
+        const allMessages = [...messages, ...pendingMessages];
 
-      const chatWindowRect = chatWindowElement.getBoundingClientRect();
-      let lastVisibleMessageIndex = -1;
-      for (let i = messageElements.length - 1; i >= firstNewMessageIndex; i--) {
-        const messageEl = messageElements[i];
-        if (messageEl) {
-          const rect = messageEl.getBoundingClientRect();
-          if (rect.top < chatWindowRect.bottom) {
-            lastVisibleMessageIndex = i;
-            break;
+        for (let i = allMessages.length - 1; i >= 0; i--) {
+          const messageEl = messageElements[i];
+          if (messageEl) {
+            const rect = messageEl.getBoundingClientRect();
+            if (rect.top < chatWindowRect.bottom) {
+              lastVisibleMessageIndex = i;
+              break;
+            }
           }
         }
-      }
-      if (lastVisibleMessageIndex !== -1) {
-        const remaining = messages.length - (lastVisibleMessageIndex + 1);
-        newMessagesCount = Math.max(0, remaining);
-      } else {
-        newMessagesCount = messages.length - firstNewMessageIndex;
+
+        if (lastVisibleMessageIndex !== -1) {
+          const pendingStartIndex = messages.length;
+          if (lastVisibleMessageIndex < pendingStartIndex) {
+            newMessagesCount = pendingMessages.length;
+          } else {
+            const remaining =
+              allMessages.length - (lastVisibleMessageIndex + 1);
+            newMessagesCount = Math.max(0, remaining);
+          }
+        }
       }
     }
     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
   }
 
+  /**
+   * Chamado ao clicar no botão para voltar ao fundo.
+   */
   function resumeAutoScroll() {
     isResumingScroll = true;
     userHasScrolledUp = false;
     newMessagesCount = 0;
-    firstNewMessageIndex = null;
+
+    if (pendingMessages.length > 0) {
+      messages = [...messages, ...pendingMessages];
+      pendingMessages = [];
+      while (messages.length > 500) {
+        messages.shift();
+      }
+    }
+
     scrollToBottom("smooth");
     setTimeout(() => {
       isResumingScroll = false;
     }, 500);
   }
 
+  // --- Funções de Utilidade ---
   function throttle<T extends (...args: any[]) => any>(
     func: T,
     limit: number
@@ -200,12 +223,11 @@
       `SELECT 
        messages.id, messages.chatroom_id, messages.content, messages.created_at,
        senders.id AS sender_id, senders.username, senders.slug, senders.color
-        FROM messages
-        INNER JOIN senders ON messages.sender_id = senders.id
-        WHERE messages.chatroom_id = ?
-        ORDER BY datetime(messages.created_at) ASC
-        LIMIT 500
-        `,
+     FROM messages
+     INNER JOIN senders ON messages.sender_id = senders.id
+     WHERE messages.chatroom_id = ?
+     ORDER BY datetime(messages.created_at) ASC
+     LIMIT 500`,
       [channelId]
     );
     return rows.map((row) => ({
@@ -232,7 +254,8 @@
     {#if messages.length === 0 && active}
       <p class="status">Aguardando mensagens para o canal {channelId}...</p>
     {:else}
-      {#each messages as msg, i (msg.id)}
+      {@const allMessages = [...messages, ...pendingMessages]}
+      {#each allMessages as msg, i (msg.id)}
         <div class="message" bind:this={messageElements[i]}>
           <span class="timestamp">[{formatTimestamp(msg.createdAt)}]</span>
           <span class="author" style="color: {msg.sender.identity.color};">
