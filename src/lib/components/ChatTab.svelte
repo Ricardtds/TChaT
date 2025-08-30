@@ -5,10 +5,11 @@
   import { formatTimestamp, parseEmotes } from "$lib/utils";
   import Button from "$lib/components/Button.svelte";
   import type { ChatMessage } from "$lib/chat";
+  import Message from "./Message.svelte";
 
   // --- Props (Svelte 5) ---
   const { channelId, active } = $props<{
-    channelId: string;
+    channelId: number;
     active: boolean;
   }>();
 
@@ -58,8 +59,7 @@
   onMount(() => {
     const setupDatabase = async () => {
       messages = await invoke("get_chat_history", {
-        chatroomId: channelId,
-        rowsQtd: ROWS_QTD,
+        chatroomId: Number(channelId),
       });
     };
     setupDatabase();
@@ -194,7 +194,7 @@
 
   function throttle<T extends (...args: any[]) => any>(
     func: T,
-    limit: number
+    limit: number,
   ): T {
     let inThrottle: boolean;
     return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
@@ -218,13 +218,7 @@
     {:else}
       {@const allMessages = [...messages, ...pendingMessages]}
       {#each allMessages as msg, i (msg.id)}
-        <div class="message" bind:this={messageElements[i]}>
-          <span class="timestamp">[{formatTimestamp(msg.createdAt)}]</span>
-          <span class="author" style="color: {msg.sender.identity.color};">
-            {msg.sender.username}:
-          </span>
-          <span class="content">{@html parseEmotes(msg.content)}</span>
-        </div>
+        <Message {msg} />
       {/each}
     {/if}
   </div>
@@ -279,32 +273,10 @@
   .chat-window::-webkit-scrollbar-thumb:hover {
     background: #777;
   }
-  .message {
-    padding: 0.25rem 0.5rem;
-    line-height: 1.6;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-  }
-  .message:hover {
-    background-color: #1f2937;
-  }
-  .timestamp {
-    color: #6b7280;
-    margin-right: 0.6em;
-    font-size: 0.9em;
-  }
-  .author {
-    font-weight: 600;
-    margin-right: 0.6em;
-  }
   .status {
     color: #9ca3af;
     text-align: center;
     margin: auto;
-  }
-  .content {
-    color: #f9fafb;
-    word-break: break-word;
   }
   .loading-spinner {
     padding: 1rem;
