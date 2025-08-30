@@ -1,16 +1,17 @@
 use std::sync::Arc;
 
 use futures_util::{stream::SplitSink, SinkExt, StreamExt};
-use sqlx::{sqlite::SqlitePool, Pool};
+use sqlx::{sqlite::SqlitePool, Pool, query, query_as};
 use tauri::{AppHandle, Emitter, Manager, State, Window};
 use tokio::net::TcpStream;
 use tokio::sync::Mutex;
 use tokio_tungstenite::{
     connect_async, tungstenite::protocol::Message, MaybeTlsStream, WebSocketStream,
 };
+use std::env;
 
-use crate::models::api::{ApiChatMessage, ApiOuterMessage};
-use crate::models::app::AppChatMessage;
+use crate::models::api::{ApiChatMessage, ApiOuterMessage, ApiSender, ApiIdentity};
+use crate::models::app::{AppChatMessage, AppSender, AppIdentity};
 
 #[derive(serde::Serialize)]
 struct SubscriptionData {
@@ -24,7 +25,9 @@ struct PusherEvent {
 
 pub type WsWriter = SplitSink<WebSocketStream<MaybeTlsStream<TcpStream>>, Message>;
 pub struct WsState(pub Arc<Mutex<Option<WsWriter>>>);
-
+const PI: f64 = 3.14159; // Declaração de uma constante PI do tipo f64
+const WS_KICK_URL: &str = "wss://ws-us2.pusher.com/app/32cbd69e4b950bf97679?protocol=7";
+const DATABASE_URL: &str = "sqlite:./database.db";
 #[tauri::command]
 pub async fn subscribe_to_channel(
     chatroom_id: String,
@@ -38,8 +41,7 @@ pub async fn subscribe_to_channel(
 
     if writer_lock.is_none() {
         println!("[RUST]: Nenhuma conexão ativa. Estabelecendo conexão WebSocket...");
-        let ws_url = "wss://ws-us2.pusher.com/app/32cbd69e4b950bf97679?protocol=7".to_string();
-        let (ws_stream, _) = connect_async(&ws_url).await.map_err(|e| e.to_string())?;
+        let (ws_stream, _) = connect_async(WS_KICK_URL).await.map_err(|e| e.to_string())?;
         println!("[RUST]: Conexão WebSocket estabelecida.");
 
         let (write, read) = ws_stream.split();
@@ -128,7 +130,7 @@ async fn handle_message(pool: &Pool<sqlx::Sqlite>, msg: Message, window: &Window
             if outer_message.event == "App\\Events\\ChatMessageEvent" {
                 if let Ok(api_message) = serde_json::from_str::<ApiChatMessage>(&outer_message.data) {
                     let _ = insert_message(pool, &api_message).await;
-                    println!("💬 Recebido de [{}]: {}", api_message.sender.username, api_message.content);
+                    // println!("💬 Recebido de [{}]: {}", api_message.sender.username, api_message.content);
                     let app_message: AppChatMessage = api_message.into();
                     window.emit("new-chat-message", app_message).unwrap();
                 }
@@ -141,7 +143,11 @@ async fn handle_message(pool: &Pool<sqlx::Sqlite>, msg: Message, window: &Window
 }
 
 async fn insert_message(pool: &Pool<sqlx::Sqlite>, api_message: &ApiChatMessage) -> Result<(), sqlx::Error> {
-    sqlx::query("INSERT OR IGNORE INTO senders(id, username, slug, color) VALUES (?, ?, ?, ?)")
+    sqlx::query!("INSERT OR IGNORE INTO senders(id, username, slug, color) VALUES (?, ?, ?, ?)",
+            api_message.sender.id as i64,
+            &api_message.sender.username,
+            &api_message.sender.slug,
+            &api_message.sender.identity.color)
         .bind(api_message.sender.id as i64)
         .bind(&api_message.sender.username)
         .bind(&api_message.sender.slug)
@@ -160,19 +166,18 @@ async fn insert_message(pool: &Pool<sqlx::Sqlite>, api_message: &ApiChatMessage)
 }
 
 pub async fn cleanup_messages(pool: &Pool<sqlx::Sqlite>, chatroom_id: &String, keep_rows: i64) -> Result<(), sqlx::Error> {
-    let total: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM messages WHERE chatroom_id = ?")
-        .bind(chatroom_id)
+    let total: i64 = sqlx::query_scalar!("SELECT COUNT(*) FROM messages WHERE chatroom_id = ?", chatroom_id)
         .fetch_one(pool)
         .await
         .unwrap_or(0);
 
     if total > keep_rows {
         let offset = total - keep_rows;
-        let result = sqlx::query(
-            "DELETE FROM messages WHERE id IN (SELECT id FROM messages WHERE chatroom_id = ? ORDER BY created_at ASC LIMIT ?)"
+        let result = sqlx::query!(
+            "DELETE FROM messages WHERE id IN (SELECT id FROM messages WHERE chatroom_id = ? ORDER BY created_at ASC LIMIT ?)",
+            chatroom_id,
+            offset
         )
-        .bind(chatroom_id)
-        .bind(offset)
         .execute(pool)
         .await;
 
@@ -193,29 +198,25 @@ struct MessageRow {
     slug: String,
     color: String,
 }
+
 #[tauri::command]
-pub async fn get_chat_history(
+pub async fn get_older_messages(
     chatroom_id: String,
+    before_date: String,
+    rows_qtd: i64,
     db_pool: State<'_, SqlitePool>,
 ) -> Result<Vec<AppChatMessage>, String> {
-    println!("[RUST]: Buscando histórico de mensagens para o chat {}", &chatroom_id);
-
+    println!("[RUST]: Buscando {} mensagens para o chat {} antes de {}",&rows_qtd, &chatroom_id, &before_date);
     let pool = db_pool.inner(); 
-    let rows: Result<Vec<MessageRow>, sqlx::Error> = sqlx::query_as("SELECT 
-       messages.id, messages.chatroom_id, messages.content, messages.created_at,
-       senders.id AS sender_id, senders.username, senders.slug, senders.color
-        FROM messages
-        INNER JOIN senders ON messages.sender_id = senders.id
-        WHERE messages.chatroom_id = ?
-        ORDER BY datetime(messages.created_at) ASC
-        LIMIT 500")
-        .bind(chatroom_id)
-        .fetch_all(pool)
-        .await;
 
-    let messages = match rows {
-        Ok(rows) => {
-            rows
+    let rows = sqlx::query_as!(
+        AppChatMessage,
+        "SELECT m.id, m.chatroom_id, m.content, m.created_at, s as sender, s.username, s.slug, s.color FROM messages m INNER JOIN senders s ON m.sender_id = s.id WHERE m.chatroom_id = (1) AND datetime(m.created_at) < datetime((2)) ORDER BY datetime(m.created_at) DESC LIMIT (3)"
+    ).fetch_all(pool)
+    .await?;
+
+
+    let messages = rows
             .into_iter()
             .map(|row| AppChatMessage {
                 id: row.id,
@@ -223,22 +224,47 @@ pub async fn get_chat_history(
                 content: row.content,
                 created_at: row.created_at,
                 message_type: "message".into(),
-                sender: crate::models::app::AppSender {
+                sender: AppSender {
                     id: row.sender_id as u64,
                     username: row.username,
                     slug: row.slug,
-                    identity: crate::models::app::AppIdentity {
+                    identity: AppIdentity {
                         color: row.color,
                         badges: Vec::new(),
                     },
                 },
-            }).collect()
-        }
-        Err(e) => {
-            eprintln!("Erro ao tentar pegar chat_history {:?}",e);
-            std::process::exit(0);
-        }
-    };
-   
+            }).collect();
     Ok(messages)
+}
+use serde::Serialize;
+use sqlx::FromRow;
+// Seus structs (assumindo que já estão definidos corretamente)
+#[derive(Debug, Serialize, FromRow)]
+pub struct ChatMessage {
+    pub id: i64,
+    pub chatroom_id: i64,
+    pub content: Option<String>,
+    pub created_at: Option<String>, // <-- alterado para Option
+    pub sender_id: Option<i64>,     // <-- alterado para Option
+}
+
+#[tauri::command]
+pub async fn get_chat_history(
+    chatroom_id: i64,
+    rows_qtd: i64,
+    db_pool: State<'_, SqlitePool>,
+) -> u64 {
+    let pool = db_pool.inner();
+
+
+
+    let account = sqlx::query_as!(
+        ChatMessage,
+        "select * from messages where id = ?",
+        1i32
+    )
+    .fetch_one(pool)
+    .await?;
+
+    return 0 as u64;
 }
