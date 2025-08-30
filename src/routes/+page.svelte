@@ -1,31 +1,33 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
-  import { onMount } from "svelte";
   import { load, type Store } from "@tauri-apps/plugin-store";
+  import { onMount } from "svelte";
+  import { writable, type Writable } from "svelte/store";
   import ChatTab from "$lib/components/ChatTab.svelte";
+  import Formulary from "$lib/components/Formulary.svelte";
+  import { type Channel } from "$lib/chat";
 
-  // --- Estado do Componente (Usando Svelte 5 Runes) ---
   let store: Store;
-  let newChannelName: string = $state("");
-  let newChatroomId: string = $state("");
 
-  type Tab = { id: string; title: string };
+  type Tab = { id: number; title: string };
   let tabs: Tab[] = $state([]);
-  let activeTabId: string | null = $state(null);
+  type ChatTabsStore = Writable<Channel[]>;
+  export const chatTabs: ChatTabsStore = writable([]);
+  let activeTabId: number | null = $state(null);
 
   let showPopup: boolean = $state(false);
   let tabsContainer: HTMLUListElement | null = null;
 
   // --- Estado para o Drag and Drop Nativo ---
-  let draggedItemId: string | null = $state(null);
-  let dragOverItemId: string | null = $state(null);
+  let draggedItemId: number | null = $state(null);
+  let dragOverItemId: number | null = $state(null);
 
   // --- Funções da Interface ---
-  function openPopup() {
+  function openPopup(): void {
     showPopup = true;
   }
 
-  function closePopup() {
+  function closePopup(): void {
     showPopup = false;
   }
 
@@ -35,60 +37,15 @@
     tabsContainer.scrollLeft += event.deltaY;
   }
 
-  // --- Funções para o Drag and Drop Nativo ---
-
-  function handleDragStart(event: DragEvent, tabId: string) {
-    draggedItemId = tabId;
-    // É necessário definir algum dado para o arraste funcionar no Firefox
-    event.dataTransfer!.setData("text/plain", tabId);
-    event.dataTransfer!.effectAllowed = "move";
-  }
-
-  function handleDragOver(event: DragEvent, tabId: string) {
-    // Prevenir o comportamento padrão é CRUCIAL para permitir que o evento 'drop' funcione.
-    event.preventDefault();
-    if (tabId !== draggedItemId) {
-      dragOverItemId = tabId;
-    }
-  }
-
-  function handleDragLeave() {
-    dragOverItemId = null;
-  }
-
-  function handleDrop(event: DragEvent, droppedOnTabId: string) {
-    event.preventDefault();
-    if (!draggedItemId || draggedItemId === droppedOnTabId) {
-      return;
-    }
-
-    const draggedIndex = tabs.findIndex((t) => t.id === draggedItemId);
-    const targetIndex = tabs.findIndex((t) => t.id === droppedOnTabId);
-
-    if (draggedIndex === -1 || targetIndex === -1) return;
-
-    // Lógica para reordenar o array
-    const newTabsOrder = [...tabs];
-    const [draggedItem] = newTabsOrder.splice(draggedIndex, 1);
-    newTabsOrder.splice(targetIndex, 0, draggedItem);
-
-    // Atualiza o estado do Svelte. O Svelte cuidará do DOM.
-    // O $effect cuidará de salvar o novo estado.
-    tabs = newTabsOrder;
-  }
-
-  function handleDragEnd() {
-    // Limpa o estado ao final do arraste para remover os estilos visuais
-    draggedItemId = null;
-    dragOverItemId = null;
-  }
-
-  // Efeito reativo para salvar o estado sempre que as abas mudarem.
   $effect(() => {
     if (store) {
       saveTabsState();
     }
   });
+
+  function removeChatTab(id: number) {
+    chatTabs.update((tabs) => tabs.filter((tab) => tab.id !== id));
+  }
 
   async function saveTabsState() {
     if (!store) return;
@@ -97,44 +54,36 @@
     await store.save();
   }
 
-  async function addChatTab() {
-    if (
-      !newChatroomId ||
-      !newChannelName ||
-      tabs.find((t) => t.id === newChatroomId)
-    ) {
-      return;
-    }
-    closePopup();
+  async function addChatTab(newChannelName: string, newChatroomId: number) {
     try {
       await invoke("subscribe_to_channel", { chatroomId: newChatroomId });
-      const newTab: Tab = { id: newChatroomId, title: newChannelName };
-      tabs.push(newTab);
+      tabs = [...tabs, { id: newChatroomId, title: newChannelName }];
       activeTabId = newChatroomId;
-      newChannelName = "";
-      newChatroomId = "";
       saveTabsState();
     } catch (e) {
-      console.error(`Erro ao se inscrever no chatroom ${newChatroomId}: ${e}`);
+      console.error(
+        `Erro ao realizar a inscrição do chatroom ${newChatroomId}:`,
+        e,
+      );
     }
   }
-
-  async function closeTab(tabIdToClose: string) {
+  async function closeTab(tabIdToClose: number) {
+    tabIdToClose = Number(tabIdToClose);
     try {
       await invoke("unsubscribe_from_channel", { chatroomId: tabIdToClose });
+      const indexToRemove = tabs.findIndex((tab) => tab.id === tabIdToClose);
+      if (indexToRemove > -1) {
+        tabs.splice(indexToRemove, 1);
+      }
+      if (activeTabId === tabIdToClose) {
+        activeTabId = tabs.at(0)?.id ?? null;
+      }
       saveTabsState();
     } catch (e) {
       console.error(
         `Erro ao cancelar a inscrição do chatroom ${tabIdToClose}:`,
-        e
+        e,
       );
-    }
-    const indexToRemove = tabs.findIndex((tab) => tab.id === tabIdToClose);
-    if (indexToRemove > -1) {
-      tabs.splice(indexToRemove, 1);
-    }
-    if (activeTabId === tabIdToClose) {
-      activeTabId = tabs.at(0)?.id ?? null;
     }
   }
 
@@ -144,12 +93,12 @@
     if (!savedTabs || savedTabs.length === 0) return;
 
     const connectionPromises = savedTabs.map((tab) =>
-      invoke("subscribe_to_channel", { chatroomId: tab.id })
+      invoke("subscribe_to_channel", { chatroomId: Number(tab.id) })
         .then(() => ({ ...tab, status: "success" as const }))
         .catch((e) => {
           console.error(`Falha ao se reinscrever no chatroom ${tab.id}:`, e);
           return { ...tab, status: "failure" as const };
-        })
+        }),
     );
     const results = await Promise.all(connectionPromises);
     tabs = results.reduce<Tab[]>((acc, result) => {
@@ -171,14 +120,10 @@
             class:active={tab.id === activeTabId}
             class:dragging={draggedItemId === tab.id}
             class:drag-over={dragOverItemId === tab.id}
-            ondragstart={(e) => handleDragStart(e, tab.id)}
-            ondragover={(e) => handleDragOver(e, tab.id)}
-            ondragleave={handleDragLeave}
-            ondrop={(e) => handleDrop(e, tab.id)}
-            ondragend={handleDragEnd}
           >
             <button class="tab-title" onclick={() => (activeTabId = tab.id)}>
               {tab.title}
+              {tab.id}
             </button>
             <button
               class="tab-close"
@@ -221,30 +166,7 @@
   </header>
 
   {#if showPopup}
-    <div
-      class="popup-backdrop"
-      role="button"
-      tabindex="0"
-      onclick={closePopup}
-      onkeydown={(e) => e.key === "Escape" && closePopup()}
-    >
-      <div
-        class="popup"
-        role="dialog"
-        tabindex="0"
-        onclick={(e) => e.stopPropagation()}
-      >
-        <div class="connect-form">
-          <input bind:value={newChannelName} placeholder="Nome do Canal" />
-          <input
-            bind:value={newChatroomId}
-            placeholder="ID da Sala de Chat"
-            onkeydown={(e) => e.key === "Enter" && addChatTab()}
-          />
-          <button onclick={addChatTab}>Conectar</button>
-        </div>
-      </div>
-    </div>
+    <Formulary {addChatTab} {closePopup} />
   {/if}
 
   <div class="tabs-content">
@@ -267,26 +189,6 @@
     box-sizing: inherit;
   }
 
-  .popup-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-
-  .popup {
-    background: #1f2937;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid #374151;
-    min-width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
   .container {
     display: flex;
     flex-direction: column;
@@ -307,33 +209,6 @@
     border-bottom: 1px solid #374151;
   }
 
-  .connect-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .connect-form input {
-    padding: 0.75rem;
-    background-color: #111827;
-    border: 1px solid #374151;
-    color: #e5e7eb;
-    border-radius: 6px;
-    font-size: 1rem;
-  }
-  .connect-form button {
-    padding: 0.75rem 1.5rem;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  .connect-form button:hover {
-    background-color: #2563eb;
-  }
   .tab-pane {
     display: none;
     flex-grow: 1;
