@@ -16,3 +16,8 @@ export interface ChatMessage {
   createdAt: string;
   sender: Sender;
 }
+
+export interface Channel {
+  id: number;
+  name: string;
+}
