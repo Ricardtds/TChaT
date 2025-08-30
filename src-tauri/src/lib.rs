@@ -27,24 +27,24 @@ pub fn run() {
             let app_dir = app_handle
                 .path()
                 .app_data_dir()
-                .expect("Não foi possível obter o diretório de dados do app");
+                .expect("❌ Não foi possível obter o diretório de dados do app.");
             
-            fs::create_dir_all(&app_dir).expect("Não foi possível criar o diretório de dados do app");
-            let db_path = app_dir.join("mydatabase.db");
+            fs::create_dir_all(&app_dir).expect("❌ Não foi possível criar o diretório de dados do app.");
+            let db_path = app_dir.join("tchat.db");
 
-            println!("[RUST]: Caminho do banco de dados: {}", db_path.display());
+            println!("✅ [RUST]: Caminho do banco de dados: {}", db_path.display());
 
             let connect_options = SqliteConnectOptions::from_str(db_path.to_str().unwrap())
-                .expect("Não foi possível criar opções de conexão")
+                .expect("❌ Não foi possível criar opções de conexão")
                 .create_if_missing(true); // A ordem explícita para criar o arquivo se não existir
 
             let pool = SqlitePool::connect_with(connect_options)
                 .await
-                .expect("Falha ao conectar no banco de dados com opções");
+                .expect("❌ Falha ao conectar no banco de dados com opções.");
             
-            MIGRATOR.run(&pool).await.expect("Falha ao rodar as migrações do banco");
+            MIGRATOR.run(&pool).await.expect("❌ Falha ao rodar as migrações do banco.");
             
-            println!("[RUST]: Banco de dados inicializado com sucesso.");
+            println!("✅ [RUST]: Banco de dados inicializado com sucesso.");
 
             app_handle.manage(pool);
         });
@@ -58,7 +58,7 @@ pub fn run() {
             commands::subscribe_to_channel,
             commands::unsubscribe_from_channel,
             commands::get_chat_history,
-            commands::get_older_messages,
+            // commands::get_older_messages,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
