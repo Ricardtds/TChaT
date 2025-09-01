@@ -1,5 +1,5 @@
 [package]
-name = "t_chat"
+name = "tchat"
 version = "0.1.0"
 description = "T Chat: Um cliente de chat de alta performance para a Kick. Construído com Rust e Tauri, ele usa Svelte para uma interface de usuário rápida e responsiva."
 authors = ["Ricardo Teixeira dos Santos"]
@@ -27,13 +27,16 @@ sqlx = { version = "0.8.6", features = [
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
-tokio = { version = "1", features = ["full"] }
 tokio-tungstenite = { version = "0.27.0", features = [
     "rustls-tls-webpki-roots",
 ] }
+tokio = { version = "1", features = ["full"] }
 rustls = { version = "0.23", features = ["aws-lc-rs"] }
+
 futures-util = "0.3.31"
-dotenv = "0.15.0"
+base64 = "0.22"
+reqwest = "0.12.23"
+
 [features]
 
 # DO NOT REMOVE!!
