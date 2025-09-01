@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            DELETE FROM messages\n            WHERE id IN (\n                SELECT id\n                FROM messages\n                WHERE chatroom_id = $1\n                ORDER BY created_at ASC\n                LIMIT (\n                    SELECT CASE\n                        WHEN COUNT(*) > 20000 THEN 5000\n                        ELSE 0\n                    END\n                    FROM messages\n                    WHERE chatroom_id = $1\n                )\n            )\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "f3afb8f239e1daa5866469d425703b65d70b6e7fc347d9817dd49a30ec909e3d"
+}

@@ -1,0 +1,38 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            SELECT\n                sb.sender_id,\n                b.type as badge_type,\n                b.text as badge_text,\n                b.count as badge_count\n            FROM sender_badges sb\n            JOIN badges b ON sb.badge_id = b.id\n            WHERE sb.sender_id IN ($1)\n            ",
+  "describe": {
+    "columns": [
+      {
+        "name": "sender_id",
+        "ordinal": 0,
+        "type_info": "Integer"
+      },
+      {
+        "name": "badge_type",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "badge_text",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "badge_count",
+        "ordinal": 3,
+        "type_info": "Integer"
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "43a6f758c668e287a50d40c54f762d667eb742d8eeebb383e3cc7b7325c471f2"
+}

@@ -1,20 +1,20 @@
 {
   "db_name": "SQLite",
-  "query": "SELECT COUNT(*) FROM messages WHERE chatroom_id = ?",
+  "query": "SELECT id FROM badges WHERE type = $1 AND text = $2 AND count IS $3",
   "describe": {
     "columns": [
       {
-        "name": "COUNT(*)",
+        "name": "id",
         "ordinal": 0,
         "type_info": "Integer"
       }
     ],
     "parameters": {
-      "Right": 1
+      "Right": 3
     },
     "nullable": [
       false
     ]
   },
-  "hash": "686f3e5f430f24b5e6099974b9b202a2d6e414eab30b19066e7417f0353c64bf"
+  "hash": "0bc160f235f3996d3afc7d352c5ac59b7e054803ee43a909922c084b339ac5d0"
 }

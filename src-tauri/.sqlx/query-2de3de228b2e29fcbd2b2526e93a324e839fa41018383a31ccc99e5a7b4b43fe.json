@@ -1,0 +1,68 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            SELECT\n                m.id,\n                m.chatroom_id,\n                m.content,\n                m.type,\n                m.created_at,\n                s.id as sender_id,\n                s.username,\n                s.slug,\n                s.color\n            FROM messages m\n            JOIN senders s ON m.sender_id = s.id\n            WHERE m.chatroom_id = $1 AND m.created_at < $2\n            ORDER BY m.created_at DESC\n            LIMIT $3\n    ",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "chatroom_id",
+        "ordinal": 1,
+        "type_info": "Integer"
+      },
+      {
+        "name": "content",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "type",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "sender_id",
+        "ordinal": 5,
+        "type_info": "Integer"
+      },
+      {
+        "name": "username",
+        "ordinal": 6,
+        "type_info": "Text"
+      },
+      {
+        "name": "slug",
+        "ordinal": 7,
+        "type_info": "Text"
+      },
+      {
+        "name": "color",
+        "ordinal": 8,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "2de3de228b2e29fcbd2b2526e93a324e839fa41018383a31ccc99e5a7b4b43fe"
+}

@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            INSERT OR IGNORE INTO \n                messages(id, chatroom_id, sender_id, content, type, created_at)\n            VALUES\n                ($1, $2, $3, $4, $5, $6)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 6
+    },
+    "nullable": []
+  },
+  "hash": "64501a7f499b23a3da33c56b950ad027b00c824303a24b1a99e5c1d07c7bfb00"
+}

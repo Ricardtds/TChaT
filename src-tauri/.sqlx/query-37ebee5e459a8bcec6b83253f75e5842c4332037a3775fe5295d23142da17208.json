@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n                    INSERT OR IGNORE INTO\n                        sender_badges(sender_id, badge_id, chatroom_id)\n                    VALUES\n                        ($1, $2, $3)\n                    ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "37ebee5e459a8bcec6b83253f75e5842c4332037a3775fe5295d23142da17208"
+}

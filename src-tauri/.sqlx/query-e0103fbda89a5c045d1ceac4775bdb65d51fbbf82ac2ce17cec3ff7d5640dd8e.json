@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n                INSERT OR IGNORE INTO \n                    badges(type, text, count) \n                VALUES \n                    ($1, $2, $3)\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "e0103fbda89a5c045d1ceac4775bdb65d51fbbf82ac2ce17cec3ff7d5640dd8e"
+}

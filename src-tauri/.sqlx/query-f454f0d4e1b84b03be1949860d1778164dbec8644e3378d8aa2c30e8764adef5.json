@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            INSERT OR IGNORE INTO \n                senders(id, username, slug, color)\n            VALUES \n                (?, ?, ?, ?)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 4
+    },
+    "nullable": []
+  },
+  "hash": "f454f0d4e1b84b03be1949860d1778164dbec8644e3378d8aa2c30e8764adef5"
+}
