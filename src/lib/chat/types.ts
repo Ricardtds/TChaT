@@ -21,3 +21,6 @@ export interface Channel {
   id: number;
   name: string;
 }
+export interface ChatMessageWithHeight extends ChatMessage {
+  _height: number;
+}
