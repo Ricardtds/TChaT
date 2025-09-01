@@ -1,283 +1,218 @@
 <script lang="ts">
+  import { onMount, tick } from "svelte";
   import { listen, type UnlistenFn } from "@tauri-apps/api/event";
   import { invoke } from "@tauri-apps/api/core";
-  import { onMount, tick } from "svelte";
-  import { formatTimestamp, parseEmotes } from "$lib/utils";
-  import Button from "$lib/components/Button.svelte";
+  import VirtualList from "@sveltejs/svelte-virtual-list";
   import type { ChatMessage } from "$lib/chat";
   import Message from "./Message.svelte";
+  import Button from "$lib/components/Button.svelte";
 
-  // --- Props (Svelte 5) ---
-  const { channelId, active } = $props<{
-    channelId: number;
-    active: boolean;
-  }>();
+  export let channelId: number;
+  export let active: boolean;
 
-  // --- CONSTANTE PARA QUANTIDADE DE LINHAS ---
-  const ROWS_QTD = 200;
-  const HISTORY_PAGE_SIZE = 250; // Quantidade para buscar no scroll infinito
+  const ROWS_QTD = 500; // Limite de mensagens em memória
+  const HISTORY_PAGE_SIZE = 250; // Histórico por página
+  const ITEM_HEIGHT = 60; // Altura média da mensagem
 
-  // --- Estado do Componente ---
-  let messages = $state<ChatMessage[]>([]);
-  let pendingMessages: ChatMessage[] = $state([]);
+  let messages: ChatMessage[] = [];
+  let pendingMessages: ChatMessage[] = [];
   let unlisten: UnlistenFn;
   let chatWindowElement: HTMLDivElement;
-  let messageElements: HTMLElement[] = $state([]);
 
-  let userHasScrolledUp = $state(false);
-  let newMessagesCount = $state(0);
-  let isResumingScroll = false;
-  let isAutoScrolling = false;
-  let lastScrollTop = 0;
+  let userHasScrolledUp = false;
+  let newMessagesCount = 0;
+  let isLoadingHistory = false;
+  let hasMoreHistoryToLoad = true;
 
-  let isLoadingHistory = $state(false);
-  let hasMoreHistoryToLoad = $state(true);
+  let start = 0;
+  let end = 0;
 
-  async function scrollToBottom(behavior: "smooth" | "auto" = "auto") {
-    isAutoScrolling = true;
-    await tick();
-    if (chatWindowElement) {
-      chatWindowElement.scrollTo({
-        top: chatWindowElement.scrollHeight,
-        behavior,
-      });
-      lastScrollTop = chatWindowElement.scrollTop;
-    }
-    setTimeout(() => {
-      isAutoScrolling = false;
-    }, 150);
-  }
-
-  let firstTime: boolean = true;
-  $effect(() => {
-    if (active && chatWindowElement && messages.length > 0 && firstTime) {
-      scrollToBottom();
-      firstTime = false;
-    }
-  });
-
+  // --- Inicializa histórico e listener ---
   onMount(() => {
     const setupDatabase = async () => {
-      messages = await invoke("get_chat_history", {
-        chatroomId: Number(channelId),
+      const now = new Date();
+      const initialMessages: ChatMessage[] = await invoke("get_chat_history", {
+        chatroomId: channelId,
+        beforeDate: now.toISOString(),
+        rowsQtd: ROWS_QTD,
       });
+      messages = [...initialMessages];
+      await tick();
+      end = messages.length - 1; // força VirtualList para o final
     };
-    setupDatabase();
-
-    const throttledHandleScroll = throttle(handleScroll, 100);
-    chatWindowElement.addEventListener("scroll", throttledHandleScroll);
 
     const setupListener = async () => {
-      unlisten = await listen<ChatMessage>("new-chat-message", (event) => {
-        if (event.payload.chatroomId.toString() === channelId) {
-          const isAtBottomBeforeUpdate = !userHasScrolledUp;
+      unlisten = await listen<ChatMessage>(
+        "new-chat-message",
+        async (event) => {
+          if (event.payload.chatroomId !== channelId) return;
+
           if (userHasScrolledUp) {
-            pendingMessages.push(event.payload);
+            pendingMessages = [...pendingMessages, event.payload];
             newMessagesCount = pendingMessages.length;
-          } else if (isAtBottomBeforeUpdate) {
-            if (messages.length >= ROWS_QTD) {
-              messages.shift();
-            }
-            messages.push(event.payload);
-            scrollToBottom("auto");
+          } else {
+            const prevHeight = chatWindowElement.scrollHeight;
+            messages = [...messages, event.payload];
+            if (messages.length > ROWS_QTD)
+              messages.splice(0, messages.length - ROWS_QTD);
+            await tick();
+            chatWindowElement.scrollTop +=
+              chatWindowElement.scrollHeight - prevHeight;
+            end = messages.length - 1;
           }
         }
-      });
+      );
     };
+
+    setupDatabase();
     setupListener();
+
     return () => {
-      if (unlisten) unlisten();
-      chatWindowElement.removeEventListener("scroll", throttledHandleScroll);
+      unlisten?.();
     };
   });
 
+  // --- Infinite scroll ---
   async function loadMoreHistory() {
-    if (isLoadingHistory || !hasMoreHistoryToLoad || messages.length === 0) {
+    if (isLoadingHistory || !hasMoreHistoryToLoad) return;
+    isLoadingHistory = true;
+
+    const oldestDate = messages[0]?.createdAt;
+    if (!oldestDate) {
+      isLoadingHistory = false;
       return;
     }
-    isLoadingHistory = true;
-    const oldestMessageDate = messages[0].createdAt;
-    console.log("Catando mensagens");
-    console.log(oldestMessageDate);
 
-    const olderMessages = await invoke<ChatMessage[]>("get_older_messages", {
+    const olderMessages: ChatMessage[] = await invoke("get_chat_history", {
       chatroomId: channelId,
-      beforeDate: oldestMessageDate,
+      beforeDate: oldestDate,
       rowsQtd: HISTORY_PAGE_SIZE,
     });
 
-    if (olderMessages.length > 0) {
-      const oldScrollHeight = chatWindowElement.scrollHeight;
+    if (olderMessages.length) {
+      const prevHeight = chatWindowElement.scrollHeight;
       messages = [...olderMessages, ...messages];
       await tick();
-      const newScrollHeight = chatWindowElement.scrollHeight;
-      chatWindowElement.scrollTop += newScrollHeight - oldScrollHeight;
+      chatWindowElement.scrollTop +=
+        chatWindowElement.scrollHeight - prevHeight;
     } else {
       hasMoreHistoryToLoad = false;
     }
+
     isLoadingHistory = false;
   }
 
+  $: end;
+  // --- Scroll handler ---
   function handleScroll() {
-    if (isAutoScrolling || isResumingScroll || !chatWindowElement) return;
-    console.log(chatWindowElement.scrollTop);
+    if (!chatWindowElement) return;
 
-    if (chatWindowElement.scrollTop <= 200 && !isLoadingHistory) {
-      loadMoreHistory();
-    }
-
-    const currentScrollTop = chatWindowElement.scrollTop;
+    const scrollTop = chatWindowElement.scrollTop;
     const scrollHeight = chatWindowElement.scrollHeight;
     const clientHeight = chatWindowElement.clientHeight;
-    const isAtBottom = scrollHeight - currentScrollTop - clientHeight < 100;
 
-    if (isAtBottom) {
-      userHasScrolledUp = false;
-      newMessagesCount = 0;
-      if (pendingMessages.length > 0) {
-        messages = [...messages, ...pendingMessages];
-        pendingMessages = [];
-        while (messages.length > ROWS_QTD) {
-          messages.shift();
-        }
-      }
-    } else {
-      if (currentScrollTop < lastScrollTop) {
-        userHasScrolledUp = true;
-      }
-      if (userHasScrolledUp && pendingMessages.length > 0) {
-        const chatWindowRect = chatWindowElement.getBoundingClientRect();
-        let lastVisibleMessageIndex = -1;
-        const allMessages = [...messages, ...pendingMessages];
-        for (let i = allMessages.length - 1; i >= 0; i--) {
-          const messageEl = messageElements[i];
-          if (messageEl) {
-            const rect = messageEl.getBoundingClientRect();
-            if (rect.top < chatWindowRect.bottom) {
-              lastVisibleMessageIndex = i;
-              break;
-            }
-          }
-        }
-        if (lastVisibleMessageIndex !== -1) {
-          const pendingStartIndex = messages.length;
-          if (lastVisibleMessageIndex < pendingStartIndex) {
-            newMessagesCount = pendingMessages.length;
-          } else {
-            const remaining =
-              allMessages.length - (lastVisibleMessageIndex + 1);
-            newMessagesCount = Math.max(0, remaining);
-          }
-        }
-      }
-    }
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-  }
+    const isAtBottom = scrollHeight - scrollTop - clientHeight < 10;
+    userHasScrolledUp = !isAtBottom;
 
-  function resumeAutoScroll() {
-    isResumingScroll = true;
-    userHasScrolledUp = false;
-    newMessagesCount = 0;
+    if (start <= 20 && !isLoadingHistory) loadMoreHistory();
 
-    if (pendingMessages.length > 0) {
+    if (isAtBottom && pendingMessages.length > 0) {
       messages = [...messages, ...pendingMessages];
       pendingMessages = [];
-      while (messages.length > ROWS_QTD) {
-        messages.shift();
-      }
+      newMessagesCount = 0;
+      end = messages.length - 1;
+      tick().then(() => {
+        chatWindowElement.scrollTop = chatWindowElement.scrollHeight;
+      });
+    } else {
+      newMessagesCount = pendingMessages.length;
     }
-    scrollToBottom("smooth");
-    setTimeout(() => {
-      isResumingScroll = false;
-    }, 500);
   }
 
-  function throttle<T extends (...args: any[]) => any>(
-    func: T,
-    limit: number,
-  ): T {
-    let inThrottle: boolean;
-    return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
-      if (!inThrottle) {
-        func.apply(this, args);
-        inThrottle = true;
-        setTimeout(() => (inThrottle = false), limit);
-      }
-    } as T;
+  // --- Botão de novas mensagens ---
+  function resumeAutoScroll() {
+    messages = [...messages, ...pendingMessages];
+    pendingMessages = [];
+    newMessagesCount = 0;
+    tick().then(() => {
+      end = messages.length - 1;
+      chatWindowElement.scrollTop = chatWindowElement.scrollHeight;
+    });
   }
 </script>
 
 <div class="chat-container">
-  <div bind:this={chatWindowElement} class="chat-window">
+  <div
+    bind:this={chatWindowElement}
+    class="chat-window"
+    on:scroll={handleScroll}
+  >
     {#if isLoadingHistory}
       <div class="loading-spinner">Carregando histórico...</div>
     {/if}
 
-    {#if messages.length === 0 && pendingMessages.length === 0 && active && !isLoadingHistory}
-      <p class="status">Aguardando mensagens para o canal {channelId}...</p>
-    {:else}
-      {@const allMessages = [...messages, ...pendingMessages]}
-      {#each allMessages as msg, i (msg.id)}
-        <Message {msg} />
-      {/each}
-    {/if}
-  </div>
+    <VirtualList
+      items={messages}
+      bind:start
+      bind:end
+      let:item
+      itemSize={ITEM_HEIGHT}
+    >
+      {#if item}
+        {#key item.id ?? item.createdAt}
+          <Message msg={item} />
+        {/key}
+      {/if}
+    </VirtualList>
 
-  {#if userHasScrolledUp}
-    <Button {newMessagesCount} {resumeAutoScroll}></Button>
-  {/if}
+    {#if end < messages.length}
+      <Button {resumeAutoScroll} newMessagesCount={messages.length - end} />
+    {/if}
+
+    <p>showing {start}-{end} of {messages.length}</p>
+  </div>
 </div>
 
 <style>
   .chat-container {
     position: relative;
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
     min-height: 0;
-    flex-direction: column;
   }
+
   .chat-window {
     padding: 0.5rem;
     background-color: #111827;
     display: flex;
     flex-direction: column;
     color: #d1d5db;
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      "Open Sans",
-      "Helvetica Neue",
-      sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
     font-size: 14px;
     flex-grow: 1;
     width: 100%;
     min-height: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
+
   .chat-window::-webkit-scrollbar {
     width: 10px;
   }
+
   .chat-window::-webkit-scrollbar-track {
     background: transparent;
   }
+
   .chat-window::-webkit-scrollbar-thumb {
     background: #555;
     border-radius: 5px;
   }
+
   .chat-window::-webkit-scrollbar-thumb:hover {
     background: #777;
   }
-  .status {
-    color: #9ca3af;
-    text-align: center;
-    margin: auto;
-  }
+
   .loading-spinner {
     padding: 1rem;
     text-align: center;

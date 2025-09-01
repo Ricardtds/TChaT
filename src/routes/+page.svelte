@@ -49,29 +49,36 @@
 
   async function saveTabsState() {
     if (!store) return;
-    const openTabs = tabs.map((t) => ({ id: t.id, title: t.title }));
+    const openTabs = tabs.map((t) => ({ id: Number(t.id), title: t.title }));
     await store.set("openTabs", openTabs);
     await store.save();
   }
 
   async function addChatTab(newChannelName: string, newChatroomId: number) {
     try {
-      await invoke("subscribe_to_channel", { chatroomId: newChatroomId });
+      await invoke("subscribe_to_channel", {
+        chatroomId: Number(newChatroomId),
+        chatroomName: newChannelName,
+      });
       tabs = [...tabs, { id: newChatroomId, title: newChannelName }];
       activeTabId = newChatroomId;
       saveTabsState();
     } catch (e) {
       console.error(
         `Erro ao realizar a inscrição do chatroom ${newChatroomId}:`,
-        e,
+        e
       );
     }
   }
   async function closeTab(tabIdToClose: number) {
     tabIdToClose = Number(tabIdToClose);
+    console.log(tabIdToClose);
+
     try {
       await invoke("unsubscribe_from_channel", { chatroomId: tabIdToClose });
-      const indexToRemove = tabs.findIndex((tab) => tab.id === tabIdToClose);
+      const indexToRemove = tabs.findIndex((tab) => tab.id == tabIdToClose);
+      console.log(indexToRemove);
+
       if (indexToRemove > -1) {
         tabs.splice(indexToRemove, 1);
       }
@@ -82,23 +89,28 @@
     } catch (e) {
       console.error(
         `Erro ao cancelar a inscrição do chatroom ${tabIdToClose}:`,
-        e,
+        e
       );
     }
   }
 
   onMount(async () => {
-    store = await load("tchat.config.dat");
+    store = await load("tchat.config.json");
     const savedTabs = await store.get<Tab[]>("openTabs");
+    console.log(savedTabs);
+
     if (!savedTabs || savedTabs.length === 0) return;
 
     const connectionPromises = savedTabs.map((tab) =>
-      invoke("subscribe_to_channel", { chatroomId: Number(tab.id) })
+      invoke("subscribe_to_channel", {
+        chatroomId: Number(tab.id),
+        chatroomName: tab.title,
+      })
         .then(() => ({ ...tab, status: "success" as const }))
         .catch((e) => {
           console.error(`Falha ao se reinscrever no chatroom ${tab.id}:`, e);
           return { ...tab, status: "failure" as const };
-        }),
+        })
     );
     const results = await Promise.all(connectionPromises);
     tabs = results.reduce<Tab[]>((acc, result) => {
