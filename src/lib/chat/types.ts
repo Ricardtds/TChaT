@@ -5,16 +5,16 @@ interface Identity {
 export interface Sender {
   id: number;
   username: string;
-  slug: string;
-  identity: Identity;
+  color: string;
+  badges: any[];
 }
 export interface ChatMessage {
   id: string;
   chatroomId: number;
   content: string;
-  messageType: string;
   createdAt: string;
   sender: Sender;
+  type: string;
 }
 
 export interface Channel {
