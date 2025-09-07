@@ -1,67 +1,70 @@
-use sqlx::{Pool, SqlitePool};
+use std::collections::HashSet;
+
+use serde_json::Error;
+use sqlx::{Pool, Sqlite, SqlitePool};
 use tauri::{Emitter, Window};
 use tokio_tungstenite::tungstenite::Message;
 
-use crate::models::{
-    api::{self, Channel},
-    app,
-};
+use crate::models::{api, app, db};
 
-pub async fn handle_message(
+pub async fn handle_messages(
     pool: &Pool<sqlx::Sqlite>,
-    msg: Message,
+    msgs: Vec<Message>,
     window: &Window,
-) -> Result<(), ()> {
-    if let Message::Text(text) = msg {
-        let outer_message = serde_json::from_str::<api::IncomingEvent>(&text);
-        match outer_message {
-            Ok(outer_message) => match outer_message {
-                api::IncomingEvent::PusherEvent(data) => match data.data {
-                    api::PusherEventEnum::ChatMessage(msg) => {}
-                    api::PusherEventEnum::Connection(msg) => {}
-                    api::PusherEventEnum::Error(msg) => {}
-                    api::PusherEventEnum::Subscription(msg) => {}
-                },
-                api::IncomingEvent::PusherEventChannel(data) => match data.data {
-                    api::PusherEventEnum::ChatMessage(data) => match data {
-                        api::ChatMessageEnum::ChatMessage(msg) => {
-                            // println!("💬 Recebido de [{}]: {}", msg.sender.username, msg.content);
-                            let _ = insert_message(pool, &msg).await;
-                            let app_message: app::ChatMessage = msg.into();
-                            window.emit("new-chat-message", app_message).unwrap();
-                        }
-                        api::ChatMessageEnum::ChatMessageWithMetadata(msg) => {
-                            // println!("💬 Recebido de [{}]: {}", msg.sender.username, msg.content);
-                            let _ = insert_message(pool, &msg).await;
-                            let app_message: app::ChatMessageWithMetadata = msg.into();
-                            window.emit("new-chat-message", app_message).unwrap();
-                        }
-                    },
-                    api::PusherEventEnum::Connection(msg) => {}
-                    api::PusherEventEnum::Error(msg) => {}
-                    api::PusherEventEnum::Subscription(msg) => {}
-                },
-            },
-            Err(e) => {
-                eprintln!(
-                    "❌ Erro ao desserializar mensagem: {} O json é {} \n",
-                    e, &text
-                );
-                // return Err(());
+) -> Result<(), Error> {
+    let mut chat_messages: Vec<api::ChatMessageData> = Vec::new();
+    let mut app_messages: Vec<app::Message> = Vec::new();
+    
+    for msg in msgs {
+        if let Message::Text(text) = msg {
+            let event: api::ChatMessageEvent = serde_json::from_str(&text)?;
+            match event.event.as_str() {
+                "App\\Events\\ChatMessageEvent"=> {
+                    let data: api::ChatMessageData = serde_json::from_str(&event.data)?;
+                    chat_messages.push(data.clone());
+                        let app_message = app::Message {
+                            id: data.id,
+                            chatroom_id: data.chatroom_id,
+                            content: data.content,
+                            created_at: data.created_at,
+                            r#type: data.r#type,
+                            sender: app::Sender {
+                                id: data.sender.id,
+                                username: data.sender.username,
+                                color: data.sender.identity.color,
+                                badges: data
+                                    .sender
+                                    .identity
+                                    .badges
+                                    .iter()
+                                    .cloned()
+                                    .map(|opt| opt.map(|b| b.into_app()))
+                                    .collect(),
+                            },
+                        };
+                        // println!("✅ Mensagem desserializada {:?}",&app_message);
+                        app_messages.push(app_message);
+                }
+                _ => {
+                    eprintln!("❌ Evento desconhecido: {}",event.event)
+                }
             }
         }
-    } else if let Message::Close(_) = msg {
-        return Err(());
     }
+    window.emit("new-chat-messages", app_messages).unwrap();
+
+    insert_messages(pool, chat_messages)
+        .await
+        .map_err(|e| eprintln!("❌ Erro ao inserir mensagens: {:?}", e));
     Ok(())
 }
 
 pub async fn insert_chatroom(
     pool: &Pool<sqlx::Sqlite>,
+    // TODO Fazer
     chatroom_name: String,
     chatroom_id: i32,
 ) -> Result<(), sqlx::Error> {
-    println!("task executada");
     sqlx::query!(
         r#"
             INSERT OR IGNORE INTO 
@@ -74,105 +77,105 @@ pub async fn insert_chatroom(
     )
     .execute(pool)
     .await?;
-    println!("task finalizada");
     Ok(())
 }
 
-async fn insert_message(
-    pool: &Pool<sqlx::Sqlite>,
-    api_message: &impl Channel,
+async fn insert_messages(
+    pool: &Pool<Sqlite>,
+    api_messages: Vec<api::ChatMessageData>,
 ) -> Result<(), sqlx::Error> {
-    let mut tx = pool.begin().await?;
-    let message = api_message.get_chatmessage();
+    let mut unique_senders = HashSet::new();
+    let mut messages_to_insert = Vec::new();
+    let mut sender_badge_relations = Vec::new();
 
-    sqlx::query!(
-        r#"
-            INSERT OR IGNORE INTO 
-                senders(id, username, slug, color)
-            VALUES 
-                (?, ?, ?, ?)
-        "#,
-        message.sender.id,
-        message.sender.username,
-        message.sender.slug,
-        message.sender.identity.color
-    )
-    .execute(&mut *tx)
-    .await
-    .map_err(|e| {
-        eprintln!("Erro no insert: {:?}", e);
-        e
-    })?;
+    for api_message in api_messages {
+        let message = api_message;
 
-    sqlx::query!(
-        r#"
-            INSERT OR IGNORE INTO 
-                messages(id, chatroom_id, sender_id, content, type, created_at)
-            VALUES
-                ($1, $2, $3, $4, $5, $6)
-        "#,
-        message.id,
-        message.chatroom_id,
-        message.sender.id,
-        message.content,
-        message.message_type,
-        message.created_at
-    )
-    .execute(&mut *tx)
-    .await
-    .map_err(|e| {
-        eprintln!("Erro no insert: {:?}", e);
-        e
-    })?;
+        let message_item = db::Message {
+            id: message.id,
+            chatroom_id: message.chatroom_id,
+            sender_id: message.sender.id,
+            content: message.content,
+            r#type: message.r#type,
+            created_at: message.created_at,
+            metadata: message.metadata.and_then(|data| Some(data.message_ref)),
+        };
+        messages_to_insert.push(message_item);
 
-    if let Some(badges) = message.sender.identity.badges {
-        for badge in badges {
-            println!("Inserindo selo: {:?}", badge);
-            sqlx::query!(
-                r#"
-                INSERT OR IGNORE INTO 
-                    badges(type, text, count) 
-                VALUES 
-                    ($1, $2, $3)
-                "#,
-                badge.badge_type,
-                badge.text,
-                badge.count
-            )
-            .execute(&mut *tx)
-            .await
-            .map_err(|e| {
-                eprintln!("❌ Erro no insert de badges: {:?}", e);
-                e
-            })?;
+        let sender = api::Sender {
+            id: message.sender.id,
+            username: message.sender.username,
+            slug: message.sender.slug,
+            identity: message.sender.identity.clone(),
+        };
+        unique_senders.insert(sender);
 
-            sqlx::query!(
-                r#"
-                INSERT OR IGNORE INTO sender_badges (sender_id, badge_id, chatroom_id)
-                VALUES (
-                    $1, 
-                    (SELECT id FROM badges WHERE type = $2 AND text = $3 AND count IS $4),
-                    $5
-                )
-                "#,
-                message.sender.id,
-                badge.badge_type,
-                badge.text,
-                badge.count,
-                message.chatroom_id
-            )
-            .execute(&mut *tx)
-            .await
-            .map_err(|e| {
-                eprintln!("❌ Erro ao inserir sender_badge: {:?}", e);
-                e
-            })?;
+        for badge_option in message.sender.identity.badges {
+            if let Some(badge) = badge_option {
+                let badge_id = match badge.r#type.as_str() {
+                    "og" => 1,
+                    "bot" => 2,
+                    "vip" => 3,
+                    "founder" => 4,
+                    "moderator" => 5,
+                    "sub_gifter" => 6,
+                    "subscriber" => 7,
+                    "broadcaster" => 8,
+                    "verified" => 9,
+                    _ => 0,
+                };
+
+                sender_badge_relations.push(db::SenderBadge {
+                    sender_id: message.sender.id,
+                    chatroom_id: message.chatroom_id,
+                    badge_id: badge_id,
+                    count: badge.count,
+                });
+            }
         }
     }
-    tx.commit().await.map_err(|e| {
-        eprintln!("❌ Erro no insert: {:?}", e);
-        e
-    })?;
+
+    let mut tx = pool.begin().await?;
+
+    for sender in &unique_senders {
+        sqlx::query!(
+            "INSERT OR IGNORE INTO senders(id, username, slug, color) VALUES ($1, $2, $3, $4)",
+            sender.id,
+            sender.username,
+            sender.slug,
+            sender.identity.color
+        )
+        .execute(&mut *tx)
+        .await?;
+    }
+
+    for message in &messages_to_insert {
+        sqlx::query!(
+            "INSERT OR IGNORE INTO messages(id, chatroom_id, sender_id, content, type, created_at) VALUES ($1, $2, $3, $4, $5, $6)",
+            message.id,
+            message.chatroom_id,
+            message.sender_id,
+            message.content,
+            message.r#type,
+            message.created_at
+        )
+        .execute(&mut *tx)
+        .await?;
+    }
+
+    for relation in &sender_badge_relations {
+        sqlx::query!(
+            "INSERT OR IGNORE INTO sender_badges (sender_id, badge_id, chatroom_id, count) VALUES ($1, $2, $3, $4)",
+            relation.sender_id,
+            relation.badge_id,
+            relation.chatroom_id,
+            relation.count
+        )
+        .execute(&mut *tx)
+        .await?;
+    }
+
+    tx.commit().await?;
     Ok(())
 }
 
@@ -187,12 +190,7 @@ pub async fn delete_chatroom(
         chatroom_id
     )
     .execute(pool)
-    .await
-    .map_err(|e| {
-        eprintln!("Erro no insert: {:?}", e);
-        e
-    })?;
-
+    .await?;
     Ok(())
 }
 
@@ -200,10 +198,6 @@ pub async fn cleanup_messages_by_chatroom(
     pool: &SqlitePool,
     chatroom_id: i32,
 ) -> Result<(), sqlx::Error> {
-    println!(
-        "Iniciando limpeza de mensagens para o chatroom_id: {}",
-        chatroom_id
-    );
     sqlx::query!(
         r#"
             DELETE FROM messages
@@ -225,11 +219,7 @@ pub async fn cleanup_messages_by_chatroom(
         chatroom_id,
     )
     .execute(pool)
-    .await
-    .map_err(|e| {
-        eprintln!("Erro na limpeza chat: {:?}", e);
-        e
-    })?;
+    .await?;
 
     Ok(())
 }
