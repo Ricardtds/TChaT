@@ -43,7 +43,6 @@ export async function getEmoteDataURL(emoteId: string): Promise<string> {
     const result: FetchedEmote = await invoke("fetch_emote_from_web", {
       emoteId,
     });
-    console.log("Objeto completo recebido do Rust:", result);
 
     await invoke("cache_emote_locally", {
       emoteId: emoteId,

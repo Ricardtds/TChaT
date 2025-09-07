@@ -42,25 +42,27 @@
     };
 
     const setupListener = async () => {
-      unlisten = await listen<ChatMessage>(
-        "new-chat-message",
-        async (event) => {
-          if (event.payload.chatroomId !== channelId) return;
+      unlisten = await listen<Array<ChatMessage>>(
+        "new-chat-messages",
+        (event) => {
+          event.payload.forEach(async (message) => {
+            if (message.chatroomId !== channelId) return;
 
-          if (userHasScrolledUp) {
-            pendingMessages = [...pendingMessages, event.payload];
-            newMessagesCount = pendingMessages.length;
-          } else {
-            const prevHeight = chatWindowElement.scrollHeight;
-            messages = [...messages, event.payload];
-            if (messages.length > ROWS_QTD)
-              messages.splice(0, messages.length - ROWS_QTD);
-            await tick();
-            chatWindowElement.scrollTop +=
-              chatWindowElement.scrollHeight - prevHeight;
-            end = messages.length - 1;
-          }
-        }
+            if (userHasScrolledUp) {
+              pendingMessages = [...pendingMessages, message];
+              newMessagesCount = pendingMessages.length;
+            } else {
+              const prevHeight = chatWindowElement.scrollHeight;
+              messages = [...messages, message];
+              if (messages.length > ROWS_QTD)
+                messages.splice(0, messages.length - ROWS_QTD);
+              await tick();
+              chatWindowElement.scrollTop +=
+                chatWindowElement.scrollHeight - prevHeight;
+              end = messages.length - 1;
+            }
+          });
+        },
       );
     };
 

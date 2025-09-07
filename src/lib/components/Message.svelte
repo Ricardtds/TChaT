@@ -15,8 +15,8 @@
     style="height: {msg._height ? msg._height + 'px' : 'auto'};"
   >
     <span class="timestamp">[{formatTimestamp(msg.createdAt)}]</span>
-    <span class="author" style="color: {msg.sender.identity.color};">
-      {#each msg.sender.identity.badges as badge}
+    <span class="author" style="color: {msg.sender.color};">
+      {#each msg.sender.badges as badge}
         <img
           src={badge.url}
           alt={badge.text}
