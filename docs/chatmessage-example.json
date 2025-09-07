@@ -1,0 +1,32 @@
+{
+    "event": "App\\Events\\ChatMessageEvent",
+    "data": {
+        "id": "61644892-7e60-4422-b5b6-b68bdf880430",
+        "chatroom_id": 66973867,
+        "content": "Mande a sua mensagem de voz na live com o seus gaupoints -> https://streamelements.com/gaules/store",
+        "type": "message",
+        "created_at": "2025-09-07T15:26:43+00:00",
+        "sender": {
+            "id": 1160406,
+            "username": "BotRix",
+            "slug": "botrix",
+            "identity": {
+                "color": "#75FD46",
+                "badges": [
+                    {
+                        "type": "moderator",
+                        "text": "Moderator"
+                    },
+                    {
+                        "type": "verified",
+                        "text": "Verified channel"
+                    }
+                ]
+            }
+        },
+        "metadata": {
+            "message_ref": "1757258803522"
+        }
+    },
+    "channel": "chatrooms.66973867.v2"
+}

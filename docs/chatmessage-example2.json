@@ -1,0 +1,23 @@
+{
+    "event": "App\\Events\\ChatMessageEvent",
+    "data": {
+        "id": "332b621f-3a1e-4d5d-8e89-1694318ffc01",
+        "chatroom_id": 2320311,
+        "content": "ud83cudf39ud83dudc95ud83dudc51 LO MAS TIERNO LO MAS DIVINO Y LO MAS HERMOSO ud83dudc51ud83dudc95ud83cudf39 LA REINA OSITA 100% SUPERPODEROSA ud83cudf39ud83dudc95ud83dudc51",
+        "type": "message",
+        "created_at": "2025-08-22T12:57:12+00:00",
+        "sender": {
+            "id": 67703796,
+            "username": "DillanJeff",
+            "slug": "dillanjeff",
+            "identity": {
+                "color": "#93EBE0",
+                "badges": []
+            }
+        },
+        "metadata": {
+            "message_ref": "1755867431482"
+        }
+    },
+    "channel": "chatrooms.2320311.v2"
+}

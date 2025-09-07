@@ -1,0 +1,29 @@
+{
+    "event": "App\\Events\\ChatMessageEvent",
+    "data": {
+        "id": "a55c811f-de74-406b-80b3-e48c3195bfaf",
+        "chatroom_id": 2320311,
+        "content": "Thanks for the follow @lijo11",
+        "type": "message",
+        "created_at": "2025-08-22T12:57:20+00:00",
+        "sender": {
+            "id": 4377088,
+            "username": "KickBot",
+            "slug": "kickbot",
+            "identity": {
+                "color": "#E9113C",
+                "badges": [
+                    {
+                        "type": "moderator",
+                        "text": "Moderator"
+                    },
+                    {
+                        "type": "verified",
+                        "text": "Verified channel"
+                    }
+                ]
+            }
+        }
+    },
+    "channel": "chatrooms.2320311.v2"
+}
