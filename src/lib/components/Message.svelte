@@ -1,22 +1,29 @@
 <script lang="ts">
-  import { type ChatMessageWithHeight } from "$lib/chat";
+  import { parseMessage, type ChatMessage, type MessagePart } from "$lib/chat";
   import { formatTimestamp } from "$lib/utils";
-  import { parseMessage, type MessagePart } from "$lib/chat";
-  import Emote from "$lib/components/Emote.svelte";
+  import Emote from "./Emote.svelte";
+  export let message: ChatMessage;
 
-  export let msg: ChatMessageWithHeight;
-
-  const messageParts: MessagePart[] = msg ? parseMessage(msg.content) : [];
+  const messageParts: MessagePart[] = message
+    ? parseMessage(message.content)
+    : [];
 </script>
 
-{#if msg}
-  <div
-    class="message"
-    style="height: {msg._height ? msg._height + 'px' : 'auto'};"
-  >
-    <span class="timestamp">[{formatTimestamp(msg.createdAt)}]</span>
-    <span class="author" style="color: {msg.sender.color};">
-      {#each msg.sender.badges as badge}
+<!-- <div class="mb-1 max-w-full text-sm hover:bg-[#1F2936]" id={message.id}>
+  <p class="break-words overflow-wrap-anywhere">
+    <span class="text-[#999999]">[{formatTimestamp(message.created_at)}]</span>
+    <span style="color: {message.sender.identity.color};" class="font-semibold"
+      >{message.sender.username}:</span
+    >
+    <span class="font-regular">{message.content}</span>
+  </p>
+</div> -->
+
+<div class="message">
+  <p class="break-words overflow-wrap-anywhere">
+    <span class="timestamp">[{formatTimestamp(message.createdAt)}]</span>
+    <span class="author" style="color: {message.sender.identity.color};">
+      {#each message.sender.badges as badge}
         <img
           src={badge.url}
           alt={badge.text}
@@ -24,10 +31,10 @@
           title={badge.text}
         />
       {/each}
-      {msg.sender.username}:
+      {message.sender.username}:
     </span>
 
-    <span class="content">
+    <span>
       {#each messageParts as part}
         {#if part.type === "text"}
           {part.content}
@@ -36,36 +43,5 @@
         {/if}
       {/each}
     </span>
-  </div>
-{/if}
-
-<style>
-  .message {
-    padding: 0.25rem 0.5rem;
-    line-height: 1.6;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-    font-size: 1rem;
-    color: #f9fafb;
-  }
-  .message:hover {
-    background-color: #1f2937;
-  }
-  .timestamp {
-    color: #6b7280;
-    margin-right: 0.6em;
-    font-size: 0.9em;
-  }
-  .author {
-    font-weight: 600;
-    margin-right: 0.6em;
-  }
-  .content {
-    word-break: break-word;
-  }
-  .badge {
-    height: 1.2em;
-    margin-right: 0.3em;
-    vertical-align: middle;
-  }
-</style>
+  </p>
+</div>

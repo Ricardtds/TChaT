@@ -7,12 +7,13 @@ pub struct Message {
     pub content: String,
     pub r#type: String,
     pub created_at: String,
-    pub metadata: Option<String>
+    pub metadata: Option<String>,
 }
 
-#[derive(Deserialize)]pub struct SenderBadge {
+#[derive(Deserialize)]
+pub struct SenderBadge {
     pub chatroom_id: i32,
     pub sender_id: i32,
     pub badge_id: i32,
-    pub count: Option<i32>
+    pub count: Option<i32>,
 }

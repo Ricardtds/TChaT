@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 use serde_json::Error;
 use sqlx::{Pool, Sqlite, SqlitePool};
@@ -14,23 +14,24 @@ pub async fn handle_messages(
 ) -> Result<(), Error> {
     let mut chat_messages: Vec<api::ChatMessageData> = Vec::new();
     let mut app_messages: Vec<app::Message> = Vec::new();
-    
+
     for msg in msgs {
         if let Message::Text(text) = msg {
             let event: api::ChatMessageEvent = serde_json::from_str(&text)?;
             match event.event.as_str() {
-                "App\\Events\\ChatMessageEvent"=> {
+                "App\\Events\\ChatMessageEvent" => {
                     let data: api::ChatMessageData = serde_json::from_str(&event.data)?;
                     chat_messages.push(data.clone());
-                        let app_message = app::Message {
-                            id: data.id,
-                            chatroom_id: data.chatroom_id,
-                            content: data.content,
-                            created_at: data.created_at,
-                            r#type: data.r#type,
-                            sender: app::Sender {
-                                id: data.sender.id,
-                                username: data.sender.username,
+                    let app_message = app::Message {
+                        id: data.id,
+                        chatroom_id: data.chatroom_id,
+                        content: data.content,
+                        created_at: data.created_at,
+                        r#type: data.r#type,
+                        sender: app::Sender {
+                            id: data.sender.id,
+                            username: data.sender.username,
+                            identity: app::Identity {
                                 color: data.sender.identity.color,
                                 badges: data
                                     .sender
@@ -41,22 +42,39 @@ pub async fn handle_messages(
                                     .map(|opt| opt.map(|b| b.into_app()))
                                     .collect(),
                             },
-                        };
-                        // println!("✅ Mensagem desserializada {:?}",&app_message);
-                        app_messages.push(app_message);
+                        },
+                    };
+                    // println!("✅ Mensagem desserializada {:?}",&app_message);
+                    app_messages.push(app_message);
                 }
                 _ => {
-                    eprintln!("❌ Evento desconhecido: {}",event.event)
+                    eprintln!("❌ Evento desconhecido: {}", event.event)
                 }
             }
         }
     }
-    window.emit("new-chat-messages", app_messages).unwrap();
+
+    emit_grouped_messages(window, app_messages);
+    // window.emit("new-chat-messages", app_messages).unwrap();
 
     insert_messages(pool, chat_messages)
         .await
         .map_err(|e| eprintln!("❌ Erro ao inserir mensagens: {:?}", e));
     Ok(())
+}
+
+fn emit_grouped_messages(window: &Window, app_messages: Vec<app::Message>) {
+    let mut grouped: HashMap<i32, Vec<app::Message>> = HashMap::new();
+
+    for msg in app_messages {
+        grouped.entry(msg.chatroom_id).or_default().push(msg);
+    }
+
+    for (chatroom_id, messages) in grouped {
+        let event_name = format!("new-chat-messages-{}", chatroom_id);
+        println!("{}", event_name);
+        window.emit(&event_name, messages).unwrap();
+    }
 }
 
 pub async fn insert_chatroom(

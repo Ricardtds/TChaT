@@ -7,16 +7,13 @@
 </script>
 
 {#await emoteSrcPromise}
-  <span
-    title={name}
-    style="display: inline-block; width: 1.6em; height: 1.6em; vertical-align: middle;"
-  ></span>
+  <span title={name}></span>
 {:then src}
   <img
     {src}
     alt={name}
-    class="emote"
     title={name}
+    class="inline"
     style="max-height: 1.6em; vertical-align: middle;"
   />
 {/await}

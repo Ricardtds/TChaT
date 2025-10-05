@@ -55,14 +55,11 @@ pub async fn subscribe_to_channel(
         let task_db_pool = db_pool.clone();
         let app_clone = app.clone();
 
-
         let messages_arc: Arc<Mutex<Vec<Message>>> = Arc::new(Mutex::new(Vec::new()));
-
-
 
         let messages_ws = Arc::clone(&messages_arc);
         let messages_proc = Arc::clone(&messages_arc);
-        tokio::spawn(async move{
+        tokio::spawn(async move {
             println!("✅ [RUST]: Tarefa de WebSocket iniciada.");
             let mut read_stream = read;
             while let Some(message_result) = read_stream.next().await {
@@ -76,7 +73,6 @@ pub async fn subscribe_to_channel(
                         break;
                     }
                 }
-
             }
             let ws_state = app_clone.state::<WsState>();
             *ws_state.0.lock().await = None;
@@ -86,7 +82,7 @@ pub async fn subscribe_to_channel(
             let mut interval = tokio::time::interval(Duration::from_millis(200));
             loop {
                 interval.tick().await;
-                let mut messages= messages_proc.lock().await;
+                let mut messages = messages_proc.lock().await;
                 if messages.is_empty() {
                     continue;
                 }
@@ -140,7 +136,10 @@ pub async fn unsubscribe_from_channel(
             .send(Message::Text(json_message.into()))
             .await
             .map_err(|e| e.to_string())?;
-        println!("✅ [RUST]: Inscrição cancelada para o canal {}", &chatroom_id);
+        println!(
+            "✅ [RUST]: Inscrição cancelada para o canal {}",
+            &chatroom_id
+        );
         messages::delete_chatroom(&db_pool, chatroom_id)
             .await
             .map_err(|e| e.to_string())?;
@@ -173,7 +172,7 @@ pub async fn get_chat_history(
             FROM messages m
             JOIN senders s ON m.sender_id = s.id
             WHERE m.chatroom_id = $1 AND m.created_at < $2
-            ORDER BY m.created_at DESC
+            ORDER BY m.created_at ASC
             LIMIT $3
     "#,
         chatroom_id,
@@ -228,11 +227,13 @@ pub async fn get_chat_history(
             sender: app::Sender {
                 id: row.sender_id as i32,
                 username: row.username,
-                color: row.color,
-                badges: badges_map
+                identity: app::Identity {
+                    color: row.color,
+                    badges: badges_map
                     .get(&row.sender_id)
                     .map(|vec| vec.iter().cloned().map(Some).collect())
                     .unwrap_or_default(),
+                }
             },
         })
         .collect();

@@ -1,29 +1,35 @@
 <script lang="ts">
-  import { preventDefault } from "svelte/legacy";
+  import { getChatInfo } from "$lib/chat";
+  let { addStreammer } = $props();
 
   let newChannelName: string = $state("");
-  let newChatroomId: number = $state(0);
 
-  const { addChatTab, closePopup } = $props<{
-    addChatTab: (newChannelName: string, newChatroomId: number) => void;
-    closePopup: () => void;
-  }>();
+  async function handleButton() {
+    let resp = await getChatInfo(newChannelName);
+    console.log(resp?.data);
+    let isOnline = false;
 
-  function handleConnect() {
-    addChatTab(newChannelName, newChatroomId);
-    closePopup();
+    let slug: string = resp?.data.slug;
+    if (resp?.data.livestream) {
+      let title = resp?.data.livestream.session_title;
+      isOnline = true;
+    }
+    let channelId = resp?.data.chatroom.channel_id;
+    let chatroomId = resp?.data.chatroom.id;
+    console.log(resp);
+
+    addStreammer(slug, isOnline, channelId, chatroomId);
   }
 </script>
 
 <div
-  class="popup-backdrop"
+  class="bg-black/80 flex z-80 justify-center flex-col items-center absolute top-0 bottom-0 left-0 right-0"
   role="button"
   tabindex="0"
-  onclick={closePopup}
-  onkeydown={(e) => e.key === "Escape" && closePopup()}
+  onkeydown={(e) => e.key === "Escape"}
 >
   <div
-    class="popup"
+    class="p-20"
     role="dialog"
     tabindex="0"
     onclick={(e) => e.stopPropagation()}
@@ -33,67 +39,20 @@
       }
     }}
   >
-    <div class="connect-form">
+    <div
+      class="connect-form flex flex-col gap-2 bg-[#1F2937] p-4 rounded-lg text-white"
+    >
       <input
         type="text"
+        class="text-center bg-[#111827] border-1 border-[#1E1E1E] rounded-lg placeholder:text-white/50 required:border-2 required:animate-bounce focus:animate-none"
         bind:value={newChannelName}
         placeholder="Nome do Canal"
+        required={true}
       />
-      <input
-        type="text"
-        bind:value={newChatroomId}
-        placeholder="ID da Sala de Chat"
-        onkeydown={(e) => e.key === "Enter" && handleConnect()}
-      />
-      <button onclick={handleConnect}>Conectar</button>
+      <button
+        class="bg-[#3B82F6] p-2 rounded-lg hover:cursor-pointer"
+        onclick={handleButton}>Conectar</button
+      >
     </div>
   </div>
 </div>
-
-<style>
-  /* Your CSS remains the same. */
-  .connect-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .connect-form input {
-    padding: 0.75rem;
-    background-color: #111827;
-    border: 1px solid #374151;
-    color: #e5e7eb;
-    border-radius: 6px;
-    font-size: 1rem;
-  }
-  .connect-form button {
-    padding: 0.75rem 1.5rem;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  .connect-form button:hover {
-    background-color: #2563eb;
-  }
-  .popup-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  .popup {
-    background: #1f2937;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid #374151;
-    min-width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-</style>
